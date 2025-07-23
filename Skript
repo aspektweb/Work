@@ -1,0 +1,7 @@
+Working with packages:
+ - Search:  pkg search <query>
+ - Install: pkg install <package>
+ - Upgrade: pkg upgrade
+
+Report issues at https://bugs.termux.com
+~/downloads $
