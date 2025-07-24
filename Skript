@@ -10,3 +10,10 @@ Report issues at https://bugs.termux.com
 
   <button onclick="alert('Salom, bu mening tugmam!')">Meni bos!</button>
 </body>
+<body>
+  <h1>Bu mening saytimgina</h1>
+
+  <button onclick="alert('Salom!')">Meni bos!</button>
+
+  <img src="https://picsum.photos/300" alt="Tasodifiy rasm" width="300">
+</body>
