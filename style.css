@@ -1,4 +1,30 @@
-body {
+/* Ijtimoiy tugmalar */
+.social-links {
+  text-align: center;
+  margin: 50px 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.social-links h2 {
+  margin-bottom: 15px;
+}
+
+.icons a {
+  text-decoration: none;
+  color: white;
+  background-color: #0077b6;
+  padding: 10px 15px;
+  margin: 5px;
+  display: inline-block;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.icons a:hover {
+  background-color: #023e8a;
+}body {
   font-family: sans-serif;
   margin: 0;
   padding: 0;
