@@ -1,33 +1,38 @@
 <!DOCTYPE html>
 <html lang="uz">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mening Saytim</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Aspekt Web</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header>
-    <h1>Assalomu alaykum!</h1>
-    <p>Tabiat mo‘jizalari saytingizga xush kelibsiz.</p>
-  </header>
+  <div class="overlay">
+    <header>
+      <h1>ASPEKT WEB SAYTI</h1>
+      <p>Sizga kerakli hamma narsa shu yerda!</p>
+    </header>
 
-  <main>
-    <button onclick="alert('Xush kelibsiz!')">Meni bos!</button>
-    <img src="https:///300" alt="Rasm" width="300">
-  </main>
+    <main>
+      <div class="buttons">
+        <a href="https://t.me/naturalwonderss" target="_blank" class="social-btn telegram">Telegram</a>
+        <a href="https://www.instagram.com/as1peckt?igsh=MWlrYWJpenFmNjZzNQ==" target="_blank" class="social-btn instagram">Instagram</a>
+        <button onclick="showForm()" class="register-btn">Ro‘yxatdan o‘tish</button>
+      </div>
 
-  <section class="social-links">
-    <h2>Ijtimoiy tarmoqlarda:</h2>
-    <div class="icons">
-      <a href="https://t.me/naturalwonderss" target="_blank">Telegram</a>
-      <a href="https://www.instagram.com/as1peckt?igsh=MWlrYWJpenFmNjZzNQ==" target="_blank">Instagram</a>
-    </div>
-  </section>
+      <div id="register-form" class="hidden form-container">
+        <h2>Ro‘yxatdan o‘tish</h2>
+        <input type="text" placeholder="Ismingiz" />
+        <input type="tel" placeholder="Telefon raqamingiz" />
+        <textarea placeholder="Qo‘shimcha ma’lumotlaringiz..."></textarea>
+        <button class="submit-btn">Yuborish</button>
+      </div>
+    </main>
 
-  <footer>
-    <p>&copy; 2025 Mening Saytim</p>
-  </footer>
+    <footer>
+      <p>&copy; 2025 Aspekt Web. Barcha huquqlar himoyalangan.</p>
+    </footer>
+  </div>
 
   <script src="script.js"></script>
 </body>
