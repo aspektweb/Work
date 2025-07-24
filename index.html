@@ -1,79 +1,170 @@
-<!DOCTYPE html><html lang="uz">
+<!DOCTYPE html>
+<html lang="uz">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mega Web Sayt</title>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
-  <style>
-    body {
-      font-family: 'Montserrat', sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #f0f0f0;
-      color: #333;
-    }
-    header {
-      background: linear-gradient(135deg, #3f87a6, #ebf8e1);
-      padding: 2rem;
-      text-align: center;
-      color: #fff;
-    }
-    header h1 {
-      margin: 0;
-      font-size: 2.5rem;
-    }
-    nav {
-      background: #222;
-      color: #fff;
-      display: flex;
-      justify-content: space-around;
-      padding: 1rem 0;
-    }
-    nav a {
-      color: #fff;
-      text-decoration: none;
-      font-weight: bold;
-    }
-    section {
-      padding: 4rem 2rem;
-      border-bottom: 1px solid #ccc;
-    }
-    .btn {
-      display: inline-block;
-      padding: 0.75rem 1.5rem;
-      background: #3f87a6;
-      color: #fff;
-      border: none;
-      border-radius: 5px;
-      text-decoration: none;
-      font-size: 1rem;
-    }
-  </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Karomov Ahrorbek Web Sahifasi</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header>
-    <h1>Mega Saytga Xush Kelibsiz</h1>
-    <p>Bu yerda texnologiya, dizayn, roʻyxat va boshqa koʻp narsalar jamlangan</p>
-  </header>  <nav>
-    <a href="#about">Biz haqimizda</a>
-    <a href="#xizmat">Xizmatlar</a>
-    <a href="#register">Roʻyxatdan oʻtish</a>
-    <a href="#contact">Aloqa</a>
-  </nav>  <!-- Quyidagi kodlar 5000 qator to‘liq HTML struktura hosil qiladi. Har bir bo‘limda oddiy matn, animatsiya, tugma va h.k. bo‘ladi -->  <!-- SECTION START -->  <!-- Pastda 4990 qatorlik bo‘limlar avtomatik ravishda yaratiladi -->  <!-- Har bir section ichida title, paragraf va tugma -->  <!-- START DYNAMIC SECTIONS -->  <!-- Quyidagi script orqali 4990 qator hosil qilamiz -->  <!-- Faqat ko‘rinishi uchun quyidagi qism statik yoziladi -->  <!-- example 50 sections with 10 lines each = 500 lines, repeat 10x -->  <!-- for demonstration only 10 blocks shown -->  <!-- START OF AUTO-GENERATED CONTENT -->  <!-- BU QISMDAN KEYINGI QATORLAR QAYTA-QAYTA CHIQARILADI -->  <!-- Section Template: copy this block many times -->  <!-- 1 -->  <section id="about">
-    <h2>Biz Haqimizda</h2>
-    <p>Biz zamonaviy va funksional vebsaytlar yaratamiz.</p>
-    <a href="#register" class="btn">Roʻyxatdan oʻting</a>
+  <header class="main-header">
+    <div class="container">
+      <h1>Karomov Ahrorbek</h1>
+      <nav>
+        <ul>
+          <li><a href="#bosh">Bosh sahifa</a></li>
+          <li><a href="#xizmatlar">Xizmatlar</a></li>
+          <li><a href="#portfolio">Portfolio</a></li>
+          <li><a href="#jamoa">Jamoa</a></li>
+          <li><a href="#aloqa">Aloqa</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section id="bosh" class="hero">
+    <div class="container">
+      <h2>Web Dasturchi & Dizayner</h2>
+      <p>Men Karomov Ahrorbek – zamonaviy va samarali web-saytlar yaratuvchisiman.</p>
+      <a href="#portfolio" class="btn">Ishlarimni ko‘rish</a>
+    </div>
   </section>
-  <!-- 2 -->
-  <section id="xizmat">
-    <h2>Xizmatlar</h2>
-    <p>Web dizayn, SEO, va boshqa xizmatlarni taqdim etamiz.</p>
-    <a href="#contact" class="btn">Biz bilan bogʻlaning</a>
-  </section>  <!-- Qolgan 4900+ qatorlar quyidagicha takrorlanuvchi bloklar bo‘ladi -->  <!-- REPEATED BLOCKS FOR CONTENT -->  <!-- Bu joyda ko‘plab bo‘limlar yaratilib, 5000 qator to‘ldiriladi -->  <!-- oxirgi sahifa -->  <section id="contact">
-    <h2>Aloqa</h2>
-    <p>Savollar uchun biz bilan bogʻlaning.</p>
-    <a href="mailto:a15301107@gmail.com" class="btn">Email Yuborish</a>
-  </section>  <footer style="text-align:center; padding:2rem; background:#222; color:#fff">
-    &copy; 2025 Mega Sayt. Barcha huquqlar himoyalangan.
-  </footer></body>
-</html>
+
+  <section id="xizmatlar" class="services">
+    <div class="container">
+      <h2>Xizmatlar</h2>
+      <div class="service-boxes">
+        <div class="service">
+          <h3>HTML5 & CSS3</h3>
+          <p>Modern web sahifalarni tayyor HTML5 va CSS3 texnologiyalari yordamida yarataman.</p>
+        </div>
+        <div class="service">
+          <h3>Responsive Dizayn</h3>
+          <p>Saytlaringiz barcha qurilmalarda ideal ko‘rinishda ishlashi uchun moslashuvchanlikni ta'minlayman.</p>
+        </div>
+        <div class="service">
+          <h3>SEO Optimallashtirish</h3>
+          <p>Google va boshqa qidiruv tizimlarida yuqori o‘rinlarni egallashga yordam beraman.</p>
+        </div>
+      </div>
+    </div>
+  </section><section id="portfolio" class="portfolio">
+    <div class="container">
+      <h2>Portfolio</h2>
+      <p>Bu yerda Karomov Ahrorbek tomonidan bajarilgan loyihalarning namunalari keltirilgan.</p>
+      <div class="portfolio-grid">
+        <div class="project-card">
+          <img src="https://via.placeholder.com/300x200" alt="Loyiha 1 rasmi">
+          <h3>Biznes Sayti</h3>
+          <p>Oddiy va chiroyli korxona web sahifasi HTML + CSS yordamida tayyorlandi.</p>
+        </div>
+        <div class="project-card">
+          <img src="https://via.placeholder.com/300x200" alt="Loyiha 2 rasmi">
+          <h3>Portfolio Websayt</h3>
+          <p>Dizaynerlar uchun shaxsiy portfolio sayti, barcha qurilmalar uchun mos.</p>
+        </div>
+        <div class="project-card">
+          <img src="https://via.placeholder.com/300x200" alt="Loyiha 3 rasmi">
+          <h3>Online Kurs Platformasi</h3>
+          <p>Talabalar uchun kurslar sahifasi, qulay navigatsiya va kontakt shakli bilan.</p>
+        </div>
+        <div class="project-card">
+          <img src="https://via.placeholder.com/300x200" alt="Loyiha 4 rasmi">
+          <h3>Blog Sahifasi</h3>
+          <p>Yangiliklar va maqolalar uchun soddaligi saqlangan, minimalist blog dizayni.</p>
+        </div>
+        <div class="project-card">
+          <img src="https://via.placeholder.com/300x200" alt="Loyiha 5 rasmi">
+          <h3>Restoran Sayti</h3>
+          <p>Restoran menyusi, buyurtma formasi va manzil bo‘limlari bilan to‘liq ishlovchi sayt.</p>
+        </div>
+        <div class="project-card">
+          <img src="https://via.placeholder.com/300x200" alt="Loyiha 6 rasmi">
+          <h3>Fotograf Portfolio</h3>
+          <p>Galereya, ishlar va kontakt bo‘limlariga ega rasmlar asosidagi portfolio sahifasi.</p>
+        </div>
+      </div>
+    </div>
+  </section><section id="jamoa" class="team">
+    <div class="container">
+      <h2>Bizning Jamoamiz</h2>
+      <p>Karomov Ahrorbek bilan birga ishlovchi kuchli va bilimli jamoamiz bilan tanishing:</p>
+      <div class="team-grid">
+        <div class="team-member">
+          <img src="https://via.placeholder.com/200x200" alt="A'zoning rasmi">
+          <h3>Karomov Ahrorbek</h3>
+          <p>Asosiy Dasturchi</p>
+          <p>HTML, CSS, GitHub, animatsiyalar bo‘yicha tajribali web developer.</p>
+        </div>
+        <div class="team-member">
+          <img src="https://via.placeholder.com/200x200" alt="A'zoning rasmi">
+          <h3>Alisher R.</h3>
+          <p>Front-End Dizayner</p>
+          <p>Interfeyslar va UX dizaynlar ustida ishlaydi. Adobe XD va Figma ustasi.</p>
+        </div>
+        <div class="team-member">
+          <img src="https://via.placeholder.com/200x200" alt="A'zoning rasmi">
+          <h3>Ziyoda T.</h3>
+          <p>Kontent Menedjer</p>
+          <p>Sayt matnlari, maqolalari va tarjimalari ustida ishlaydi.</p>
+        </div>
+        <div class="team-member">
+          <img src="https://via.placeholder.com/200x200" alt="A'zoning rasmi">
+          <h3>Javohir M.</h3>
+          <p>SEO Mutaxassisi</p>
+          <p>Qidiruv tizimlari uchun saytlarni optimallashtirishda yordam beradi.</p>
+        </div>
+      </div>
+    </div>
+  </section><section id="fikrlar" class="testimonials">
+    <div class="container">
+      <h2>Mijozlar Fikrlari</h2>
+      <p>Saytlarimizdan foydalangan mijozlar fikrlari bilan tanishing:</p>
+      <div class="testimonial-grid">
+        <div class="testimonial-card">
+          <img src="https://via.placeholder.com/100" alt="Mijoz rasmi">
+          <h3>Shahzoda M.</h3>
+          <p class="role">Startap asoschisi</p>
+          <p>"Karomov Ahrorbek saytimizni juda professional darajada ishlab chiqdi. Har bir detalga e’tibor bergan."</p>
+        </div>
+        <div class="testimonial-card">
+          <img src="https://via.placeholder.com/100" alt="Mijoz rasmi">
+          <h3>Islom X.</h3>
+          <p class="role">Kichik biznes egasi</p>
+          <p>"Saytimiz mobil qurilmalarda ham mukammal ishlayapti. Tavsiya qilaman!"</p>
+        </div>
+        <div class="testimonial-card">
+          <img src="https://via.placeholder.com/100" alt="Mijoz rasmi">
+          <h3>Aziza K.</h3>
+          <p class="role">Freelancer</p>
+          <p>"Oddiy dizayndan zamonaviy web-portfolio yaratib berdi. Endi ko‘proq mijozlarim bor."</p>
+        </div>
+        <div class="testimonial-card">
+          <img src="https://via.placeholder.com/100" alt="Mijoz rasmi">
+          <h3>Bobur T.</h3>
+          <p class="role">Blogger</p>
+          <p>"Blog sahifamni Karomov Ahrorbek tayyorlab berdi. Juda tushunarli va chiroyli."</p>
+        </div>
+      </div>
+    </div>
+  </section><section id="aloqa" class="contact">
+    <div class="container">
+      <h2>Biz bilan bog‘laning</h2>
+      <p>Quyidagi shakl orqali Karomov Ahrorbek jamoasi bilan bog‘lanishingiz mumkin:</p>
+      <form action="#" method="post" class="contact-form">
+        <div class="form-group">
+          <label for="name">Ismingiz:</label>
+          <input type="text" id="name" name="name" required placeholder="Ismingizni kiriting">
+        </div>
+        <div class="form-group">
+          <label for="email">Email manzilingiz:</label>
+          <input type="email" id="email" name="email" required placeholder="Emailingizni kiriting">
+        </div>
+        <div class="form-group">
+          <label for="message">Xabaringiz:</label>
+          <textarea id="message" name="message" rows="5" required placeholder="Xabaringizni bu yerga yozing..."></textarea>
+        </div>
+        <button type="submit" class="btn">Yuborish</button>
+      </form>
+    </div>
+  </section>
