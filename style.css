@@ -1,109 +1,39 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: Arial, sans-serif;
-}
+/* Muallif: Karomov Ahrorbek */
 
-body {
-  background-image: url('https://images.unsplash.com/photo-1548095115-45697e5f12b1');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  color: white;
-  height: 100vh;
-}
+/* Reset and basic styles */
 
-.container {
-  background-color: rgba(0, 0, 0, 0.7);
-  min-height: 100vh;
-  padding: 20px;
-  text-align: center;
-}
+{ margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; scroll-behavior: smooth; }
 
-header h1 {
-  font-size: 48px;
-  margin-bottom: 10px;
-}
 
-header p {
-  font-size: 20px;
-  margin-bottom: 40px;
-}
+body { background: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e') no-repeat center center fixed; background-size: cover; color: #fff; line-height: 1.6; }
 
-.button-group {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  max-width: 300px;
-  margin: auto;
-}
+header { background-color: rgba(0, 0, 0, 0.7); padding: 20px 0; text-align: center; }
 
-.btn {
-  padding: 15px;
-  border: none;
-  border-radius: 10px;
-  font-size: 18px;
-  color: white;
-  cursor: pointer;
-  text-decoration: none;
-  transition: 0.3s;
-}
+header h1 { font-size: 3rem; color: #00ffcc; text-shadow: 2px 2px 8px #000; }
 
-.telegram {
-  background-color: #229ED9;
-}
-.telegram:hover {
-  background-color: #1A8DBB;
-}
+nav { background-color: rgba(0, 0, 0, 0.8); display: flex; justify-content: center; padding: 10px 0; position: sticky; top: 0; z-index: 999; }
 
-.instagram {
-  background-color: #E1306C;
-}
-.instagram:hover {
-  background-color: #C32A5C;
-}
+nav a { color: white; padding: 10px 20px; text-decoration: none; transition: background 0.3s ease; }
 
-.register {
-  background-color: #4CAF50;
-}
-.register:hover {
-  background-color: #3e8e41;
-}
+nav a:hover { background: #00ffcc; color: #000; border-radius: 5px; }
 
-.form {
-  background-color: rgba(255, 255, 255, 0.1);
-  margin-top: 30px;
-  padding: 20px;
-  border-radius: 10px;
-  max-width: 400px;
-  margin-left: auto;
-  margin-right: auto;
-}
+.container { max-width: 1200px; margin: auto; padding: 40px 20px; background-color: rgba(0, 0, 0, 0.6); border-radius: 15px; box-shadow: 0 0 20px #000; }
 
-.form input,
-.form textarea {
-  width: 90%;
-  padding: 12px;
-  margin: 10px 0;
-  border-radius: 6px;
-  border: none;
-  font-size: 16px;
-}
+h2 { color: #00ffcc; margin-bottom: 20px; text-align: center; }
 
-.submit {
-  background-color: #2196F3;
-}
-.submit:hover {
-  background-color: #0f6cd8;
-}
+p { margin-bottom: 15px; }
 
-footer {
-  margin-top: 50px;
-  font-size: 14px;
-  opacity: 0.7;
-}
+.button { display: inline-block; padding: 12px 25px; background-color: #00ffcc; color: #000; font-weight: bold; text-decoration: none; border-radius: 8px; transition: transform 0.3s ease, box-shadow 0.3s ease; }
 
-.hidden {
-  display: none;
-}
+.button:hover { transform: scale(1.1); box-shadow: 0 5px 15px rgba(0, 255, 204, 0.6); }
+
+form { background-color: rgba(255, 255, 255, 0.1); padding: 30px; border-radius: 10px; margin-top: 40px; }
+
+form input, form textarea { width: 100%; padding: 10px; margin-bottom: 20px; border: none; border-radius: 5px; background-color: #eee; color: #000; font-size: 1rem; }
+
+form input[type="submit"] { background-color: #00ffcc; color: #000; cursor: pointer; font-weight: bold; transition: background 0.3s ease; }
+
+form input[type="submit"]:hover { background-color: #00cc99; }
+
+footer { background-color: rgba(0, 0, 0, 0.9); color: #aaa; text-align: center; padding: 20px 0; margin-top: 40px; font-size: 0.9rem; border-top: 1px solid #333; }
+
