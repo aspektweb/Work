@@ -1,25 +1,115 @@
 body {
   margin: 0;
   padding: 0;
-  background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb'); /* yangi orqa fon */
+  font-family: sans-serif;
+  background-image: url('https://images.unsplash.com/photo-1548095115-45697e5f12b1');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  font-family: Arial, sans-serif;
   color: white;
+}
+
+.overlay {
+  background-color: rgba(0,0,0,0.7);
+  min-height: 100vh;
+  padding: 20px;
 }
 
 header {
   text-align: center;
-  background-color: rgba(0,0,0,0.6);
-  padding: 50px 20px;
+  margin-bottom: 40px;
 }
 
-button {
-  background-color: #00bcd4;
-  color: red;
+header h1 {
+  font-size: 48px;
+  margin-bottom: 10px;
+}
+
+header p {
+  font-size: 20px;
+}
+
+.buttons {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.social-btn {
+  padding: 15px 25px;
+  margin: 10px;
+  font-size: 18px;
   border: none;
+  border-radius: 8px;
+  text-decoration: none;
+  color: white;
+  transition: background 0.3s;
+}
+
+.telegram {
+  background-color: #229ED9;
+}
+.telegram:hover {
+  background-color: #1A8DBB;
+}
+
+.instagram {
+  background-color: #E1306C;
+}
+.instagram:hover {
+  background-color: #C32A5C;
+}
+
+.register-btn {
+  background-color: #4CAF50;
+  padding: 15px 30px;
+  font-size: 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+.register-btn:hover {
+  background-color: #3e8e41;
+}
+
+.form-container {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 25px;
+  max-width: 400px;
+  margin: auto;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.form-container input,
+.form-container textarea {
+  width: 90%;
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: 5px;
+  border: none;
+  font-size: 16px;
+}
+
+.submit-btn {
   padding: 12px 20px;
+  background-color: #2196F3;
+  border: none;
+  color: white;
+  font-size: 18px;
   border-radius: 5px;
   cursor: pointer;
-  font-size:
+}
+.submit-btn:hover {
+  background-color: #1976D2;
+}
+
+footer {
+  text-align: center;
+  margin-top: 40px;
+  font-size: 14px;
+}
+
+.hidden {
+  display: none;
+}
