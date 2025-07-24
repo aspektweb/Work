@@ -17,3 +17,5 @@ Report issues at https://bugs.termux.com
 
   <img src="https://picsum.photos/300" alt="Tasodifiy rasm" width="300">
 </body>
+   // Hozircha oddiy tugma funksiyasi
+console.log("Sayt yuklandi!"); 
