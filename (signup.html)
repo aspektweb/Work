@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ro'yxatdan o'tish</title>
+  <meta charset="UTF-8">
+</head>
+<body style="text-align:center; padding: 40px;">
+  <h2>Ro'yxatdan o'tish</h2>
+  <form>
+    <label>Ismingiz:</label><br>
+    <input type="text" name="name" required><br><br>
+
+    <label>Telefon raqam:</label><br>
+    <input type="tel" name="phone" required><br><br>
+
+    <label>Email (ixtiyoriy):</label><br>
+    <input type="email" name="email"><br><br>
+
+    <button type="submit">Yuborish</button>
+  </form>
+</body>
+</html>
