@@ -5,3 +5,8 @@ Working with packages:
 
 Report issues at https://bugs.termux.com
 ~/downloads $
+<body>
+  <h1>Mening birinchi saytim</h1>
+
+  <button onclick="alert('Salom, bu mening tugmam!')">Meni bos!</button>
+</body>
