@@ -1,290 +1,318 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Neon Floating Web Project</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
-  <style>
-    body {
-      margin: 0;
-      background: #000000;
-      color: #0ff;
-      font-family: 'Orbitron', sans-serif;
-      overflow-x: hidden;
-    }header {
-  text-align: center;
-  padding: 80px 20px;
-  font-size: 3rem;
-  text-shadow: 0 0 10px #0ff, 0 0 20px #0ff, 0 0 30px #0ff;
-  animation: flicker 2s infinite alternate;
-}
-
-@keyframes flicker {
-  0% { opacity: 1; }
-  100% { opacity: 0.8; }
-}
-
-section {
-  margin: 100px auto;
-  width: 80%;
-  padding: 50px;
-  border-radius: 20px;
-  background: rgba(0, 255, 255, 0.05);
-  box-shadow: 0 0 20px #0ff, 0 0 40px #0ff inset;
-  backdrop-filter: blur(8px);
-  animation: float 6s ease-in-out infinite;
-  transition: transform 0.3s ease-in-out;
-}
-
-section:hover {
-  transform: scale(1.02);
-}
-
-@keyframes float {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-20px); }
-  100% { transform: translateY(0px); }
-}
-
-.neon-button {
-  display: inline-block;
-  padding: 15px 40px;
-  margin-top: 30px;
-  font-size: 1.2rem;
-  color: #0ff;
-  text-decoration: none;
-  border: 2px solid #0ff;
-  border-radius: 10px;
-  box-shadow: 0 0 10px #0ff, 0 0 20px #0ff;
-  transition: background 0.3s, color 0.3s;
-}
-
-.neon-button:hover {
-  background: #0ff;
-  color: #000;
-  box-shadow: 0 0 20px #0ff, 0 0 40px #0ff;
-}
-
-footer {
-  text-align: center;
-  padding: 50px;
-  color: #888;
-  font-size: 1rem;
-}
-
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeonTech - Futuristik Kompyuter Doʻkoni</title>
+    <style>
+        :root {
+            --neon-blue: #0ff0fc;
+            --neon-pink: #ff00ff;
+            --neon-purple: #9d00ff;
+            --dark-bg: #0a0a1a;
+            --darker-bg: #050510;
+        }
+        
+        body {
+            background-color: var(--dark-bg);
+            color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+        
+        .floating-window {
+            position: absolute;
+            border: 2px solid var(--neon-blue);
+            border-radius: 10px;
+            box-shadow: 0 0 15px var(--neon-blue), 
+                        inset 0 0 10px var(--neon-blue);
+            background-color: rgba(10, 10, 30, 0.8);
+            backdrop-filter: blur(5px);
+            animation: float 8s ease-in-out infinite;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(2deg); }
+        }
+        
+        .neon-header {
+            text-align: center;
+            margin: 30px 0;
+            position: relative;
+        }
+        
+        .neon-header h1 {
+            font-size: 3.5rem;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            color: transparent;
+            text-shadow: 0 0 5px var(--neon-pink), 
+                         0 0 10px var(--neon-pink), 
+                         0 0 20px var(--neon-pink), 
+                         0 0 40px var(--neon-purple);
+            animation: neon-flicker 1.5s infinite alternate;
+        }
+        
+        @keyframes neon-flicker {
+            0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+                text-shadow: 0 0 5px var(--neon-pink), 
+                             0 0 10px var(--neon-pink), 
+                             0 0 20px var(--neon-pink), 
+                             0 0 40px var(--neon-purple);
+            }
+            20%, 24%, 55% {
+                text-shadow: none;
+            }
+        }
+        
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 20px;
+            z-index: 10;
+            position: relative;
+        }
+        
+        .product-card {
+            background: rgba(20, 20, 40, 0.7);
+            border: 1px solid var(--neon-purple);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            position: relative;
+            box-shadow: 0 0 10px rgba(157, 0, 255, 0.3);
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 20px var(--neon-purple), 
+                        inset 0 0 10px var(--neon-purple);
+        }
+        
+        .product-image {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        
+        .product-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(10, 10, 30, 0.9), transparent);
+            padding: 15px;
+        }
+        
+        .product-title {
+            font-size: 1.3rem;
+            margin: 0;
+            color: var(--neon-blue);
+        }
+        
+        .product-price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--neon-pink);
+            margin: 10px 0;
+        }
+        
+        .add-to-cart {
+            background: linear-gradient(45deg, var(--neon-purple), var(--neon-pink));
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .add-to-cart:hover {
+            box-shadow: 0 0 15px var(--neon-pink);
+            transform: scale(1.05);
+        }
+        
+        .cart-icon {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 100;
+            color: var(--neon-blue);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        .cart-count {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background-color: var(--neon-pink);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+        }
+    </style>
 </head>
 <body>
-  <header>
-    Neon Floating Web Experience
-  </header>
-  <main>
-    <!-- Repeating animated neon sections to generate 2000+ lines -->
-    <!-- Start of Generated Content --><!-- 100 floating sections -->
-<!-- Each section = ~20 lines -->
+    <div class="floating-window" style="width: 200px; height: 200px; top: 10%; left: 5%;"></div>
+    <div class="floating-window" style="width: 150px; height: 150px; top: 70%; left: 80%;"></div>
+    <div class="floating-window" style="width: 250px; height: 250px; top: 20%; left: 75%;"></div>
+    <div class="floating-window" style="width: 180px; height: 180px; top: 60%; left: 15%;"></div>
 
-<!-- Will produce roughly 2000 lines in total -->
+    <div class="neon-header">
+        <h1>NeonTech</h1>
+        <p>Futuristik kompyuter texnikalari doʻkoni</p>
+    </div>
 
-<!-- START AUTO-GENERATED -->
+    <div class="product-grid">
+        <div class="product-card">
+            <div class="product-image" style="background-image: url('https://via.placeholder.com/300x200?text=Gaming+PC')"></div>
+            <div class="product-overlay">
+                <h3 class="product-title">Quantum Gaming PC</h3>
+                <p>Ultimate gaming experience with RTX 4090</p>
+                <div class="product-price">$2,499.99</div>
+                <button class="add-to-cart">Savatchaga qoʻshish</button>
+            </div>
+        </div>
 
-<!-- prettier-ignore-start -->
+        <div class="product-card">
+            <div class="product-image" style="background-image: url('https://via.placeholder.com/300x200?text=Mechanical+Keyboard')"></div>
+            <div class="product-overlay">
+                <h3 class="product-title">Neon Mechanical Keyboard</h3>
+                <p>RGB backlit with customizable macros</p>
+                <div class="product-price">$129.99</div>
+                <button class="add-to-cart">Savatchaga qoʻshish</button>
+            </div>
+        </div>
 
-" + Array.from({ length: 100 }, (_, i) => `
-<section>
-  <h2>Floating Section ${i + 1}</h2>
-  <p>
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus luctus urna sed urna ultricies ac tempor dui sagittis.
-    In condimentum facilisis porta. Sed nec diam eu diam mattis viverra.
-  </p>
-  <a href="#" class="neon-button">Explore</a>
-</section>
-`).join('') + "
+        <div class="product-card">
+            <div class="product-image" style="background-image: url('https://via.placeholder.com/300x200?text=Gaming+Mouse')"></div>
+            <div class="product-overlay">
+                <h3 class="product-title">Phantom Gaming Mouse</h3>
+                <p>16000 DPI with 11 programmable buttons</p>
+                <div class="product-price">$79.99</div>
+                <button class="add-to-cart">Savatchaga qoʻshish</button>
+            </div>
+        </div>
 
-<!-- prettier-ignore-end -->
+        <div class="product-card">
+            <div class="product-image" style="background-image: url('https://via.placeholder.com/300x200?text=4K+Monitor')"></div>
+            <div class="product-overlay">
+                <h3 class="product-title">Nebula 4K Monitor</h3>
+                <p>32" 4K UHD with 144Hz refresh rate</p>
+                <div class="product-price">$599.99</div>
+                <button class="add-to-cart">Savatchaga qoʻshish</button>
+            </div>
+        </div>
 
-<!-- END AUTO-GENERATED -->
+        <div class="product-card">
+            <div class="product-image" style="background-image: url('https://via.placeholder.com/300x200?text=Wireless+Headset')"></div>
+            <div class="product-overlay">
+                <h3 class="product-title">Cosmic Wireless Headset</h3>
+                <p>7.1 surround sound with noise cancellation</p>
+                <div class="product-price">$149.99</div>
+                <button class="add-to-cart">Savatchaga qoʻshish</button>
+            </div>
+        </div>
 
-  </main>
-  <footer>
-    &copy; 2025 All rights reserved. Designed with Neon Power.
-  </footer>
+        <div class="product-card">
+            <div class="product-image" style="background-image: url('https://via.placeholder.com/300x200?text=SSD+Drive')"></div>
+            <div class="product-overlay">
+                <h3 class="product-title">Lightning SSD 2TB</h3>
+                <p>NVMe SSD with 7000MB/s read speed</p>
+                <div class="product-price">$199.99</div>
+                <button class="add-to-cart">Savatchaga qoʻshish</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="cart-icon">
+        🛒
+        <span class="cart-count">0</span>
+    </div>
+
+    <script>
+        // Floating windows animation
+        const floatingWindows = document.querySelectorAll('.floating-window');
+        
+        floatingWindows.forEach((window, index) => {
+            // Randomize animation duration and delay
+            const duration = 8 + Math.random() * 5;
+            const delay = Math.random() * 5;
+            window.style.animation = `float ${duration}s ease-in-out ${delay}s infinite`;
+            
+            // Add neon color variation
+            const colors = ['--neon-blue', '--neon-pink', '--neon-purple'];
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            window.style.borderColor = `var(${randomColor})`;
+            window.style.boxShadow = `0 0 15px var(${randomColor}), inset 0 0 10px var(${randomColor})`;
+        });
+        
+        // Cart functionality
+        let cartItems = [];
+        const cartIcon = document.querySelector('.cart-icon');
+        const cartCount = document.querySelector('.cart-count');
+        const addToCartButtons = document.querySelectorAll('.add-to-cart');
+        
+        addToCartButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const productCard = button.closest('.product-card');
+                const productName = productCard.querySelector('.product-title').textContent;
+                const productPrice = productCard.querySelector('.product-price').textContent;
+                
+                cartItems.push({
+                    name: productName,
+                    price: productPrice
+                });
+                
+                updateCartCount();
+                
+                // Add visual feedback
+                button.textContent = "Qoʻshildi!";
+                button.style.backgroundColor = "var(--neon-blue)";
+                setTimeout(() => {
+                    button.textContent = "Savatchaga qoʻshish";
+                    button.style.backgroundColor = "";
+                }, 1000);
+            });
+        });
+        
+        function updateCartCount() {
+            cartCount.textContent = cartItems.length;
+            
+            // Animation when adding to cart
+            cartIcon.style.transform = 'scale(1.2)';
+            setTimeout(() => {
+                cartIcon.style.transform = 'scale(1)';
+            }, 300);
+        }
+        
+        // Cart click event
+        cartIcon.addEventListener('click', () => {
+            alert(`Sizning savatchangizda ${cartItems.length} ta mahsulot bor:\n\n${
+                cartItems.map(item => `• ${item.name} - ${item.price}`).join('\n')
+            }`);
+        });
+    </script>
 </body>
-</html><img src="https://upload.wikimedia.org/wikipedia/commons/4/4e/Animated_fish_swimming.gif" class="fish"><!DOCTYPE html>
-<html lang="uz">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Karomov Ahrorbek Web Sahifasi</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-  <header class="main-header">
-    <div class="container">
-      <h1>Karomov Ahrorbek</h1>
-      <nav>
-        <ul>
-          <li><a href="#bosh">Bosh sahifa</a></li>
-          <li><a href="#xizmatlar">Xizmatlar</a></li>
-          <li><a href="#portfolio">Portfolio</a></li>
-          <li><a href="#jamoa">Jamoa</a></li>
-          <li><a href="#aloqa">Aloqa</a></li>
-        </ul>
-      </nav>
-    </div>
-  </header>
-
-  <section id="bosh" class="hero">
-    <div class="container">
-      <h2>Web Dasturchi & Dizayner</h2>
-      <p>Men Karomov Ahrorbek – zamonaviy va samarali web-saytlar yaratuvchisiman.</p>
-      <a href="#portfolio" class="btn">Ishlarimni ko‘rish</a>
-    </div>
-  </section>
-
-  <section id="xizmatlar" class="services">
-    <div class="container">
-      <h2>Xizmatlar</h2>
-      <div class="service-boxes">
-        <div class="service">
-          <h3>HTML5 & CSS3</h3>
-          <p>Modern web sahifalarni tayyor HTML5 va CSS3 texnologiyalari yordamida yarataman.</p>
-        </div>
-        <div class="service">
-          <h3>Responsive Dizayn</h3>
-          <p>Saytlaringiz barcha qurilmalarda ideal ko‘rinishda ishlashi uchun moslashuvchanlikni ta'minlayman.</p>
-        </div>
-        <div class="service">
-          <h3>SEO Optimallashtirish</h3>
-          <p>Google va boshqa qidiruv tizimlarida yuqori o‘rinlarni egallashga yordam beraman.</p>
-        </div>
-      </div>
-    </div>
-  </section><section id="portfolio" class="portfolio">
-    <div class="container">
-      <h2>Portfolio</h2>
-      <p>Bu yerda Karomov Ahrorbek tomonidan bajarilgan loyihalarning namunalari keltirilgan.</p>
-      <div class="portfolio-grid">
-        <div class="project-card">
-          <img src="https://via.placeholder.com/300x200" alt="Loyiha 1 rasmi">
-          <h3>Biznes Sayti</h3>
-          <p>Oddiy va chiroyli korxona web sahifasi HTML + CSS yordamida tayyorlandi.</p>
-        </div>
-        <div class="project-card">
-          <img src="https://via.placeholder.com/300x200" alt="Loyiha 2 rasmi">
-          <h3>Portfolio Websayt</h3>
-          <p>Dizaynerlar uchun shaxsiy portfolio sayti, barcha qurilmalar uchun mos.</p>
-        </div>
-        <div class="project-card">
-          <img src="https://via.placeholder.com/300x200" alt="Loyiha 3 rasmi">
-          <h3>Online Kurs Platformasi</h3>
-          <p>Talabalar uchun kurslar sahifasi, qulay navigatsiya va kontakt shakli bilan.</p>
-        </div>
-        <div class="project-card">
-          <img src="https://via.placeholder.com/300x200" alt="Loyiha 4 rasmi">
-          <h3>Blog Sahifasi</h3>
-          <p>Yangiliklar va maqolalar uchun soddaligi saqlangan, minimalist blog dizayni.</p>
-        </div>
-        <div class="project-card">
-          <img src="https://via.placeholder.com/300x200" alt="Loyiha 5 rasmi">
-          <h3>Restoran Sayti</h3>
-          <p>Restoran menyusi, buyurtma formasi va manzil bo‘limlari bilan to‘liq ishlovchi sayt.</p>
-        </div>
-        <div class="project-card">
-          <img src="https://via.placeholder.com/300x200" alt="Loyiha 6 rasmi">
-          <h3>Fotograf Portfolio</h3>
-          <p>Galereya, ishlar va kontakt bo‘limlariga ega rasmlar asosidagi portfolio sahifasi.</p>
-        </div>
-      </div>
-    </div>
-  </section><section id="jamoa" class="team">
-    <div class="container">
-      <h2>Bizning Jamoamiz</h2>
-      <p>Karomov Ahrorbek bilan birga ishlovchi kuchli va bilimli jamoamiz bilan tanishing:</p>
-      <div class="team-grid">
-        <div class="team-member">
-          <img src="https://via.placeholder.com/200x200" alt="A'zoning rasmi">
-          <h3>Karomov Ahrorbek</h3>
-          <p>Asosiy Dasturchi</p>
-          <p>HTML, CSS, GitHub, animatsiyalar bo‘yicha tajribali web developer.</p>
-        </div>
-        <div class="team-member">
-          <img src="https://via.placeholder.com/200x200" alt="A'zoning rasmi">
-          <h3>Alisher R.</h3>
-          <p>Front-End Dizayner</p>
-          <p>Interfeyslar va UX dizaynlar ustida ishlaydi. Adobe XD va Figma ustasi.</p>
-        </div>
-        <div class="team-member">
-          <img src="https://via.placeholder.com/200x200" alt="A'zoning rasmi">
-          <h3>Ziyoda T.</h3>
-          <p>Kontent Menedjer</p>
-          <p>Sayt matnlari, maqolalari va tarjimalari ustida ishlaydi.</p>
-        </div>
-        <div class="team-member">
-          <img src="https://via.placeholder.com/200x200" alt="A'zoning rasmi">
-          <h3>Javohir M.</h3>
-          <p>SEO Mutaxassisi</p>
-          <p>Qidiruv tizimlari uchun saytlarni optimallashtirishda yordam beradi.</p>
-        </div>
-      </div>
-    </div>
-  </section><section id="fikrlar" class="testimonials">
-    <div class="container">
-      <h2>Mijozlar Fikrlari</h2>
-      <p>Saytlarimizdan foydalangan mijozlar fikrlari bilan tanishing:</p>
-      <div class="testimonial-grid">
-        <div class="testimonial-card">
-          <img src="https://via.placeholder.com/100" alt="Mijoz rasmi">
-          <h3>Shahzoda M.</h3>
-          <p class="role">Startap asoschisi</p>
-          <p>"Karomov Ahrorbek saytimizni juda professional darajada ishlab chiqdi. Har bir detalga e’tibor bergan."</p>
-        </div>
-        <div class="testimonial-card">
-          <img src="https://via.placeholder.com/100" alt="Mijoz rasmi">
-          <h3>Islom X.</h3>
-          <p class="role">Kichik biznes egasi</p>
-          <p>"Saytimiz mobil qurilmalarda ham mukammal ishlayapti. Tavsiya qilaman!"</p>
-        </div>
-        <div class="testimonial-card">
-          <img src="https://via.placeholder.com/100" alt="Mijoz rasmi">
-          <h3>Aziza K.</h3>
-          <p class="role">Freelancer</p>
-          <p>"Oddiy dizayndan zamonaviy web-portfolio yaratib berdi. Endi ko‘proq mijozlarim bor."</p>
-        </div>
-        <div class="testimonial-card">
-          <img src="https://via.placeholder.com/100" alt="Mijoz rasmi">
-          <h3>Bobur T.</h3>
-          <p class="role">Blogger</p>
-          <p>"Blog sahifamni Karomov Ahrorbek tayyorlab berdi. Juda tushunarli va chiroyli."</p>
-        </div>
-      </div>
-    </div>
-  </section><section id="aloqa" class="contact">
-    <div class="container">
-      <h2>Biz bilan bog‘laning</h2>
-      <p>Quyidagi shakl orqali Karomov Ahrorbek jamoasi bilan bog‘lanishingiz mumkin:</p>
-      <form action="#" method="post" class="contact-form">
-        <div class="form-group">
-          <label for="name">Ismingiz:</label>
-          <input type="text" id="name" name="name" required placeholder="Ismingizni kiriting">
-        </div>
-        <div class="form-group">
-          <label for="email">Email manzilingiz:</label>
-          <input type="email" id="email" name="email" required placeholder="Emailingizni kiriting">
-        </div>
-        <div class="form-group">
-          <label for="message">Xabaringiz:</label>
-          <textarea id="message" name="message" rows="5" required placeholder="Xabaringizni bu yerga yozing..."></textarea>
-        </div>
-        <button type="submit" class="btn">Yuborish</button>
-      </form>
-    </div>
-  </section>
-  <div class="social-links" style="text-align:center; margin-top: 30px;">
-  <h3>Ijtimoiy tarmoqlar orqali bog'laning</h3>
-  <p><i class="fas fa-envelope"></i> Elektron pochta: <a href="mailto:a15301107@gmail.com">a15301107@gmail.com</a></p>
-  <p>
-    <a href="https://www.instagram.com/as1peckt" target="_blank" style="color:#d6249f; font-size: 24px;">
-      <i class="fab fa-instagram"></i> Instagram
-    </a>
-  </p>
-</div>
+</html>
