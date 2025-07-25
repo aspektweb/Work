@@ -3,6 +3,572 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeonTech - Toʻlov Jarayoni</title>
+    <style>
+        /* Asosiy stil lar oldingi qismlarda berilgan */
+        
+        .checkout-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            padding: 20px;
+        }
+        
+        .cart-summary {
+            background: rgba(20, 20, 40, 0.8);
+            border: 1px solid var(--neon-purple);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 15px rgba(157, 0, 255, 0.3);
+        }
+        
+        .cart-summary-title {
+            font-size: 1.5rem;
+            color: var(--neon-blue);
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--neon-blue);
+            padding-bottom: 10px;
+        }
+        
+        .cart-items {
+            max-height: 400px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+        }
+        
+        .cart-item {
+            display: flex;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .cart-item-image {
+            width: 80px;
+            height: 80px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 5px;
+            margin-right: 15px;
+            border: 1px solid var(--neon-purple);
+        }
+        
+        .cart-item-details {
+            flex: 1;
+        }
+        
+        .cart-item-title {
+            font-size: 1rem;
+            margin: 0 0 5px 0;
+            color: var(--neon-blue);
+        }
+        
+        .cart-item-price {
+            font-size: 0.9rem;
+            color: var(--neon-pink);
+        }
+        
+        .cart-item-actions {
+            display: flex;
+            align-items: center;
+        }
+        
+        .quantity-control {
+            display: flex;
+            align-items: center;
+            margin-right: 15px;
+        }
+        
+        .quantity-btn {
+            width: 25px;
+            height: 25px;
+            background: rgba(30, 30, 60, 0.7);
+            border: 1px solid var(--neon-blue);
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .quantity-input {
+            width: 40px;
+            height: 25px;
+            text-align: center;
+            background: rgba(30, 30, 60, 0.7);
+            border: 1px solid var(--neon-blue);
+            color: white;
+            margin: 0 5px;
+        }
+        
+        .remove-item {
+            color: #ff4d4d;
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+        
+        .cart-totals {
+            margin-top: 20px;
+            border-top: 1px solid var(--neon-blue);
+            padding-top: 20px;
+        }
+        
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .total-label {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        .total-value {
+            font-weight: bold;
+        }
+        
+        .grand-total {
+            font-size: 1.2rem;
+            color: var(--neon-pink);
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid var(--neon-pink);
+        }
+        
+        .checkout-form {
+            background: rgba(20, 20, 40, 0.8);
+            border: 1px solid var(--neon-purple);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 0 15px rgba(157, 0, 255, 0.3);
+        }
+        
+        .checkout-form-title {
+            font-size: 1.5rem;
+            color: var(--neon-blue);
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--neon-blue);
+            padding-bottom: 10px;
+        }
+        
+        .form-section {
+            margin-bottom: 25px;
+        }
+        
+        .section-title {
+            font-size: 1.1rem;
+            color: var(--neon-pink);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-title::before {
+            content: '';
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background: var(--neon-pink);
+            margin-right: 10px;
+            border-radius: 50%;
+            box-shadow: 0 0 5px var(--neon-pink);
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--neon-blue);
+            font-size: 0.9rem;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 12px 15px;
+            background: rgba(30, 30, 60, 0.7);
+            border: 1px solid var(--neon-purple);
+            border-radius: 5px;
+            color: white;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 10px var(--neon-blue);
+        }
+        
+        .payment-methods {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .payment-method {
+            position: relative;
+        }
+        
+        .payment-radio {
+            position: absolute;
+            opacity: 0;
+        }
+        
+        .payment-label {
+            display: block;
+            padding: 15px;
+            background: rgba(30, 30, 60, 0.7);
+            border: 1px solid var(--neon-purple);
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+        
+        .payment-radio:checked + .payment-label {
+            background: var(--neon-purple);
+            box-shadow: 0 0 15px var(--neon-purple);
+        }
+        
+        .payment-icon {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+        
+        .checkout-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(45deg, var(--neon-purple), var(--neon-pink));
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-weight: bold;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .checkout-btn:hover {
+            box-shadow: 0 0 25px var(--neon-pink);
+            transform: translateY(-2px);
+        }
+        
+        .order-confirmation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(5, 5, 15, 0.95);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            flex-direction: column;
+            text-align: center;
+            padding: 30px;
+            display: none;
+        }
+        
+        .confirmation-icon {
+            font-size: 5rem;
+            color: var(--neon-blue);
+            margin-bottom: 30px;
+            animation: bounce 1s infinite alternate;
+        }
+        
+        @keyframes bounce {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-20px); }
+        }
+        
+        .confirmation-title {
+            font-size: 2.5rem;
+            color: var(--neon-blue);
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px var(--neon-blue);
+        }
+        
+        .confirmation-text {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 600px;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        
+        .confirmation-btn {
+            padding: 12px 30px;
+            background: var(--neon-purple);
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-weight: bold;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .confirmation-btn:hover {
+            background: var(--neon-pink);
+            box-shadow: 0 0 20px var(--neon-pink);
+        }
+        
+        /* Responsive styles */
+        @media (max-width: 992px) {
+            .checkout-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .payment-methods {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Oldingi qismlardagi kontent -->
+    
+    <!-- Checkout Page Content -->
+    <div class="checkout-container">
+        <!-- Cart Summary -->
+        <div class="cart-summary">
+            <h2 class="cart-summary-title">Savatchangiz</h2>
+            
+            <div class="cart-items" id="cartItems">
+                <!-- Cart items will be rendered here -->
+            </div>
+            
+            <div class="cart-totals">
+                <div class="total-row">
+                    <span class="total-label">Mahsulotlar:</span>
+                    <span class="total-value" id="subtotal">$0.00</span>
+                </div>
+                <div class="total-row">
+                    <span class="total-label">Yetkazib berish:</span>
+                    <span class="total-value">$15.00</span>
+                </div>
+                <div class="total-row">
+                    <span class="total-label">Chegirma:</span>
+                    <span class="total-value">-$0.00</span>
+                </div>
+                <div class="total-row grand-total">
+                    <span>Jami:</span>
+                    <span id="grandTotal">$0.00</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Checkout Form -->
+        <div class="checkout-form">
+            <h2 class="checkout-form-title">Yetkazib berish maʼlumotlari</h2>
+            
+            <div class="form-section">
+                <h3 class="section-title">Shaxsiy maʼlumotlar</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Ism</label>
+                        <input type="text" class="form-input" id="firstName" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Familiya</label>
+                        <input type="text" class="form-input" id="lastName" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Email</label>
+                    <input type="email" class="form-input" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Telefon raqam</label>
+                    <input type="tel" class="form-input" id="phone" required>
+                </div>
+            </div>
+            
+            <div class="form-section">
+                <h3 class="section-title">Yetkazib berish manzili</h3>
+                <div class="form-group">
+                    <label class="form-label">Manzil</label>
+                    <input type="text" class="form-input" id="address" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Shahar</label>
+                        <input type="text" class="form-input" id="city" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Viloyat</label>
+                        <select class="form-input" id="state" required>
+                            <option value="">Tanlang</option>
+                            <option value="toshkent">Toshkent</option>
+                            <option value="samarqand">Samarqand</option>
+                            <option value="buxoro">Buxoro</option>
+                            <option value="andijon">Andijon</option>
+                            <option value="namangan">Namangan</option>
+                            <option value="fargona">Fargʻona</option>
+                            <option value="xorazm">Xorazm</option>
+                            <option value="qoraqalpogiston">Qoraqalpogʻiston</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Pochta indeksi</label>
+                        <input type="text" class="form-input" id="zipCode" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Mamlakat</label>
+                        <input type="text" class="form-input" id="country" value="Oʻzbekiston" readonly>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-section">
+                <h3 class="section-title">Toʻlov usuli</h3>
+                <div class="payment-methods">
+                    <div class="payment-method">
+                        <input type="radio" name="payment" id="creditCard" class="payment-radio" checked>
+                        <label for="creditCard" class="payment-label">
+                            <div class="payment-icon">💳</div>
+                            <div>Kredit karta</div>
+                        </label>
+                    </div>
+                    <div class="payment-method">
+                        <input type="radio" name="payment" id="paypal" class="payment-radio">
+                        <label for="paypal" class="payment-label">
+                            <div class="payment-icon">🔵</div>
+                            <div>PayPal</div>
+                        </label>
+                    </div>
+                    <div class="payment-method">
+                        <input type="radio" name="payment" id="cash" class="payment-radio">
+                        <label for="cash" class="payment-label">
+                            <div class="payment-icon">💵</div>
+                            <div>Yetkazib berishda naqd</div>
+                        </label>
+                    </div>
+                    <div class="payment-method">
+                        <input type="radio" name="payment" id="crypto" class="payment-radio">
+                        <label for="crypto" class="payment-label">
+                            <div class="payment-icon">🪙</div>
+                            <div>Kriptovalyuta</div>
+                        </label>
+                    </div>
+                </div>
+                
+                <!-- Credit Card Form (shown when credit card is selected) -->
+                <div id="creditCardForm">
+                    <div class="form-group">
+                        <label class="form-label">Karta raqami</label>
+                        <input type="text" class="form-input" id="cardNumber" placeholder="1234 5678 9012 3456">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Amal qilish muddati</label>
+                            <input type="text" class="form-input" id="cardExpiry" placeholder="MM/YY">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">CVV</label>
+                            <input type="text" class="form-input" id="cardCvv" placeholder="123">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Karta egasi</label>
+                        <input type="text" class="form-input" id="cardName" placeholder="Ism Familiya">
+                    </div>
+                </div>
+            </div>
+            
+            <button class="checkout-btn" id="placeOrderBtn">Buyurtma berish</button>
+        </div>
+    </div>
+    
+    <!-- Order Confirmation -->
+    <div class="order-confirmation" id="orderConfirmation">
+        <div class="confirmation-icon">🎉</div>
+        <h2 class="confirmation-title">Buyurtmangiz qabul qilindi!</h2>
+        <p class="confirmation-text">
+            Rahmat! Buyurtmangiz muvaffaqiyatli qabul qilindi. Buyurtma raqami: <strong id="orderNumber">NEON-123456</strong>.
+            Tez orada siz bilan bogʻlanamiz. Buyurtmangiz holatini "Mening buyurtmalarim" boʻlimidan kuzatib borishingiz mumkin.
+        </p>
+        <button class="confirmation-btn" id="continueShoppingBtn">Bosh sahifaga qaytish</button>
+    </div>
+
+    <script>
+        // Cart data
+        let cart = JSON.parse(localStorage.getItem('neonTechCart')) || [];
+        
+        // DOM elements
+        const cartItemsContainer = document.getElementById('cartItems');
+        const subtotalElement = document.getElementById('subtotal');
+        const grandTotalElement = document.getElementById('grandTotal');
+        const placeOrderBtn = document.getElementById('placeOrderBtn');
+        const orderConfirmation = document.getElementById('orderConfirmation');
+        const continueShoppingBtn = document.getElementById('continueShoppingBtn');
+        const orderNumberElement = document.getElementById('orderNumber');
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            renderCartItems();
+            setupEventListeners();
+        });
+        
+        // Render cart items
+        function renderCartItems() {
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = '<p>Savatchangiz boʻsh</p>';
+                subtotalElement.textContent = '$0.00';
+                grandTotalElement.textContent = '$0.00';
+                return;
+            }
+            
+            cartItemsContainer.innerHTML = cart.map((item, index) => `
+                <div class="cart-item" data-index="${index}">
+                    <div class="cart-item-image" style="background-image: url('${item.image}')"></div>
+                    <div class="cart-item-details">
+                        <h3 class="cart-item-title">${item.name}</h3>
+                        <div class="cart-item-price">$${item.price.toFixed(2)}</div>
+                    </div>
+                    <div class="cart-item-actions">
+                        <div class="quantity-control">
+                            <button class="quantity-btn minus">-</button>
+                            <input type="text" class="quantity-input" value="1" readonly>
+                            <button class="quantity-btn plus">+</button>
+                        </div>
+                        <div class="remove-item">🗑️</div>
+                    </div>
+                </div>
+            `).join('');
+            
+            updateCartTotals();
+            
+            // Attach event listeners to quantity buttons
+            document.querySelectorAll('.quantity-btn.minus').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const index = parseInt(this.closest('.cart-item').getAttribute('data-index'));
+                    updateQuantity(index, -1);
+                });
+           <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NeonTech - Mahsulot Filtrlari</title>
     <style>
         /* Asosiy stil lar 1-qismda berilgan */
