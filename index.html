@@ -1,4 +1,88 @@
-<!DOCTYPE html>
+<!-- Featured Section -->
+  <section class="featured">
+    <h2 class="section-title">Tanlangan Mahsulotlar</h2>
+    <div class="products">
+
+      <div class="product-card float-card">
+        <img src="https://via.placeholder.com/300x200" alt="Mahsulot 3" />
+        <h3>Mechanical Keyboard RGB</h3>
+        <p>Cherry MX Red, full-size, RGB yoritish</p>
+        <span>$149</span>
+        <a href="#" class="btn-buy">Sotib olish</a>
+      </div>
+
+      <div class="product-card float-card">
+        <img src="https://via.placeholder.com/300x200" alt="Mahsulot 4" />
+        <h3>Gaming Mouse 12000 DPI</h3>
+        <p>RGB, 7 tugma, tezlik sozlovchi</p>
+        <span>$89</span>
+        <a href="#" class="btn-buy">Sotib olish</a>
+      </div>
+
+      <div class="product-card float-card">
+        <img src="https://via.placeholder.com/300x200" alt="Mahsulot 5" />
+        <h3>4K Monitor 32"</h3>
+        <p>3840x2160, HDR10, 144Hz</p>
+        <span>$599</span>
+        <a href="#" class="btn-buy">Sotib olish</a>
+      </div>
+
+      <div class="product-card float-card">
+        <img src="https://via.placeholder.com/300x200" alt="Mahsulot 6" />
+        <h3>Professional Headset</h3>
+        <p>Noise Canceling, RGB, 7.1 Surround</p>
+        <span>$199</span>
+        <a href="#" class="btn-buy">Sotib olish</a>
+      </div>
+
+    </div>
+  </section><!-- Popup Modal -->
+  <div class="popup" id="popup">
+    <div class="popup-content">
+      <h3>Mahsulot savatga qo‘shildi!</h3>
+      <p>Davom etasizmi yoki to‘lovga o‘tasizmi?</p>
+      <div class="popup-buttons">
+        <button onclick="closePopup()" class="btn-glow">Yopish</button>
+        <a href="#" class="btn-buy">To‘lov</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Registration Form -->
+  <section class="register-section">
+    <h2 class="section-title">Ro‘yxatdan o‘tish</h2>
+    <form class="register-form">
+      <input type="text" placeholder="Ismingiz" required />
+      <input type="email" placeholder="Email manzilingiz" required />
+      <input type="password" placeholder="Parol" required />
+      <button type="submit" class="btn-glow">Ro‘yxatdan o‘tish</button>
+    </form>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>© 2025 CyberTech Store. Barcha huquqlar himoyalangan.</p>
+    <p><a href="https://www.instagram.com/as1peckt" target="_blank">Instagram: @as1peckt</a></p>
+    <p>Email: <a href="mailto:a15301107@gmail.com">a15301107@gmail.com</a></p>
+  </footer>
+
+  <!-- Script for popup -->
+  <script>
+    // Open popup (this would be called when button clicked — example demo)
+    document.querySelectorAll('.btn-buy').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        document.getElementById('popup').classList.add('show');
+      });
+    });
+
+    function closePopup() {
+      document.getElementById('popup').classList.remove('show');
+    }
+  </script>
+
+</body>
+</html><!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
