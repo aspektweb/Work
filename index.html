@@ -3,6 +3,526 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeonTech - Kirish/Roʻyxatdan oʻtish</title>
+    <style>
+        /* Asosiy stil lar 1-qismda berilgan */
+        
+        .auth-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(5, 5, 15, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+        }
+        
+        .auth-container {
+            background: var(--darker-bg);
+            border: 2px solid var(--neon-purple);
+            border-radius: 15px;
+            padding: 30px;
+            width: 400px;
+            max-width: 90%;
+            box-shadow: 0 0 30px var(--neon-purple),
+                       inset 0 0 15px var(--neon-purple);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .auth-container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                transparent,
+                rgba(157, 0, 255, 0.1),
+                transparent
+            );
+            transform: rotate(30deg);
+            animation: shine 3s infinite;
+        }
+        
+        @keyframes shine {
+            0% { transform: rotate(30deg) translate(-30%, -30%); }
+            100% { transform: rotate(30deg) translate(30%, 30%); }
+        }
+        
+        .auth-tabs {
+            display: flex;
+            margin-bottom: 30px;
+            border-bottom: 1px solid var(--neon-blue);
+        }
+        
+        .auth-tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            color: rgba(255, 255, 255, 0.6);
+            font-weight: bold;
+            position: relative;
+        }
+        
+        .auth-tab.active {
+            color: var(--neon-blue);
+        }
+        
+        .auth-tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--neon-blue);
+            box-shadow: 0 0 10px var(--neon-blue);
+        }
+        
+        .auth-form {
+            display: none;
+        }
+        
+        .auth-form.active {
+            display: block;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--neon-blue);
+            font-size: 0.9rem;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            background: rgba(20, 20, 40, 0.7);
+            border: 1px solid var(--neon-purple);
+            border-radius: 5px;
+            color: white;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 10px var(--neon-blue);
+        }
+        
+        .password-toggle {
+            position: absolute;
+            right: 10px;
+            top: 35px;
+            cursor: pointer;
+            color: rgba(255, 255, 255, 0.5);
+            transition: all 0.3s ease;
+        }
+        
+        .password-toggle:hover {
+            color: var(--neon-pink);
+        }
+        
+        .auth-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(45deg, var(--neon-purple), var(--neon-pink));
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+        
+        .auth-btn:hover {
+            box-shadow: 0 0 20px var(--neon-pink);
+            transform: translateY(-2px);
+        }
+        
+        .auth-footer {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .auth-link {
+            color: var(--neon-blue);
+            cursor: pointer;
+            text-decoration: none;
+        }
+        
+        .auth-link:hover {
+            text-decoration: underline;
+        }
+        
+        .error-message {
+            color: #ff4d4d;
+            font-size: 0.8rem;
+            margin-top: 5px;
+            display: none;
+        }
+        
+        .close-auth {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            color: rgba(255, 255, 255, 0.6);
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .close-auth:hover {
+            color: var(--neon-pink);
+            transform: rotate(90deg);
+        }
+    </style>
+</head>
+<body>
+    <!-- 1-qismdagi kontent -->
+    
+    <!-- Auth Overlay -->
+    <div class="auth-overlay" id="authOverlay" style="display: none;">
+        <div class="auth-container">
+            <span class="close-auth" id="closeAuth">&times;</span>
+            
+            <div class="auth-tabs">
+                <div class="auth-tab active" data-tab="login">Kirish</div>
+                <div class="auth-tab" data-tab="signup">Roʻyxatdan oʻtish</div>
+            </div>
+            
+            <!-- Login Form -->
+            <div class="auth-form active" id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" class="form-control" placeholder="email@example.com">
+                    <div class="error-message" id="loginEmailError"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="loginPassword">Parol</label>
+                    <div style="position: relative;">
+                        <input type="password" id="loginPassword" class="form-control" placeholder="Parolingiz">
+                        <span class="password-toggle" id="toggleLoginPassword">👁️</span>
+                    </div>
+                    <div class="error-message" id="loginPasswordError"></div>
+                </div>
+                
+                <button class="auth-btn" id="loginBtn">Kirish</button>
+                
+                <div class="auth-footer">
+                    Akkauntingiz yoʻqmi? <span class="auth-link" id="goToSignup">Roʻyxatdan oʻting</span>
+                </div>
+            </div>
+            
+            <!-- Signup Form -->
+            <div class="auth-form" id="signupForm">
+                <div class="form-group">
+                    <label for="signupName">Ism</label>
+                    <input type="text" id="signupName" class="form-control" placeholder="Toʻliq ismingiz">
+                    <div class="error-message" id="signupNameError"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="signupEmail">Email</label>
+                    <input type="email" id="signupEmail" class="form-control" placeholder="email@example.com">
+                    <div class="error-message" id="signupEmailError"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="signupPassword">Parol</label>
+                    <div style="position: relative;">
+                        <input type="password" id="signupPassword" class="form-control" placeholder="Kamida 8 ta belgi">
+                        <span class="password-toggle" id="toggleSignupPassword">👁️</span>
+                    </div>
+                    <div class="error-message" id="signupPasswordError"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="signupConfirmPassword">Parolni tasdiqlang</label>
+                    <input type="password" id="signupConfirmPassword" class="form-control" placeholder="Parolni qayta kiriting">
+                    <div class="error-message" id="signupConfirmError"></div>
+                </div>
+                
+                <button class="auth-btn" id="signupBtn">Roʻyxatdan oʻtish</button>
+                
+                <div class="auth-footer">
+                    Akkauntingiz bormi? <span class="auth-link" id="goToLogin">Kirish</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Auth System JavaScript
+        document.addEventListener('DOMContentLoaded', function() {
+            // Auth DOM elements
+            const authOverlay = document.getElementById('authOverlay');
+            const closeAuth = document.getElementById('closeAuth');
+            const loginForm = document.getElementById('loginForm');
+            const signupForm = document.getElementById('signupForm');
+            const goToSignup = document.getElementById('goToSignup');
+            const goToLogin = document.getElementById('goToLogin');
+            const tabs = document.querySelectorAll('.auth-tab');
+            const loginBtn = document.getElementById('loginBtn');
+            const signupBtn = document.getElementById('signupBtn');
+            const toggleLoginPassword = document.getElementById('toggleLoginPassword');
+            const toggleSignupPassword = document.getElementById('toggleSignupPassword');
+            const loginPassword = document.getElementById('loginPassword');
+            const signupPassword = document.getElementById('signupPassword');
+            
+            // Open auth overlay (you can trigger this from your login button)
+            function openAuthOverlay() {
+                authOverlay.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+            }
+            
+            // Close auth overlay
+            function closeAuthOverlay() {
+                authOverlay.style.display = 'none';
+                document.body.style.overflow = 'auto';
+                clearErrors();
+            }
+            
+            // Switch between tabs
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    tabs.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    const tabName = this.getAttribute('data-tab');
+                    loginForm.classList.remove('active');
+                    signupForm.classList.remove('active');
+                    
+                    if (tabName === 'login') {
+                        loginForm.classList.add('active');
+                    } else {
+                        signupForm.classList.add('active');
+                    }
+                    
+                    clearErrors();
+                });
+            });
+            
+            // Toggle password visibility
+            toggleLoginPassword.addEventListener('click', function() {
+                const type = loginPassword.getAttribute('type') === 'password' ? 'text' : 'password';
+                loginPassword.setAttribute('type', type);
+                this.textContent = type === 'password' ? '👁️' : '👁️‍🗨️';
+            });
+            
+            toggleSignupPassword.addEventListener('click', function() {
+                const type = signupPassword.getAttribute('type') === 'password' ? 'text' : 'password';
+                signupPassword.setAttribute('type', type);
+                this.textContent = type === 'password' ? '👁️' : '👁️‍🗨️';
+            });
+            
+            // Go to signup/login links
+            goToSignup.addEventListener('click', function() {
+                tabs.forEach(t => t.classList.remove('active'));
+                document.querySelector('[data-tab="signup"]').classList.add('active');
+                loginForm.classList.remove('active');
+                signupForm.classList.add('active');
+                clearErrors();
+            });
+            
+            goToLogin.addEventListener('click', function() {
+                tabs.forEach(t => t.classList.remove('active'));
+                document.querySelector('[data-tab="login"]').classList.add('active');
+                signupForm.classList.remove('active');
+                loginForm.classList.add('active');
+                clearErrors();
+            });
+            
+            // Close handlers
+            closeAuth.addEventListener('click', closeAuthOverlay);
+            authOverlay.addEventListener('click', function(e) {
+                if (e.target === authOverlay) {
+                    closeAuthOverlay();
+                }
+            });
+            
+            // Clear all error messages
+            function clearErrors() {
+                document.querySelectorAll('.error-message').forEach(el => {
+                    el.style.display = 'none';
+                    el.textContent = '';
+                });
+            }
+            
+            // Show error message
+            function showError(elementId, message) {
+                const errorElement = document.getElementById(elementId);
+                errorElement.textContent = message;
+                errorElement.style.display = 'block';
+            }
+            
+            // Login validation
+            function validateLogin() {
+                let isValid = true;
+                const email = document.getElementById('loginEmail').value.trim();
+                const password = document.getElementById('loginPassword').value.trim();
+                
+                clearErrors();
+                
+                if (!email) {
+                    showError('loginEmailError', 'Email kiritilishi shart');
+                    isValid = false;
+                } else if (!/^\S+@\S+\.\S+$/.test(email)) {
+                    showError('loginEmailError', 'Notoʻgʻri email formati');
+                    isValid = false;
+                }
+                
+                if (!password) {
+                    showError('loginPasswordError', 'Parol kiritilishi shart');
+                    isValid = false;
+                } else if (password.length < 8) {
+                    showError('loginPasswordError', 'Parol kamida 8 ta belgidan iborat boʻlishi kerak');
+                    isValid = false;
+                }
+                
+                return isValid;
+            }
+            
+            // Signup validation
+            function validateSignup() {
+                let isValid = true;
+                const name = document.getElementById('signupName').value.trim();
+                const email = document.getElementById('signupEmail').value.trim();
+                const password = document.getElementById('signupPassword').value.trim();
+                const confirmPassword = document.getElementById('signupConfirmPassword').value.trim();
+                
+                clearErrors();
+                
+                if (!name) {
+                    showError('signupNameError', 'Ism kiritilishi shart');
+                    isValid = false;
+                }
+                
+                if (!email) {
+                    showError('signupEmailError', 'Email kiritilishi shart');
+                    isValid = false;
+                } else if (!/^\S+@\S+\.\S+$/.test(email)) {
+                    showError('signupEmailError', 'Notoʻgʻri email formati');
+                    isValid = false;
+                }
+                
+                if (!password) {
+                    showError('signupPasswordError', 'Parol kiritilishi shart');
+                    isValid = false;
+                } else if (password.length < 8) {
+                    showError('signupPasswordError', 'Parol kamida 8 ta belgidan iborat boʻlishi kerak');
+                    isValid = false;
+                }
+                
+                if (password !== confirmPassword) {
+                    showError('signupConfirmError', 'Parollar mos kelmadi');
+                    isValid = false;
+                }
+                
+                return isValid;
+            }
+            
+            // Check if user exists
+            function userExists(email) {
+                const users = JSON.parse(localStorage.getItem('neonTechUsers')) || [];
+                return users.some(user => user.email === email);
+            }
+            
+            // Login function
+            function login() {
+                if (!validateLogin()) return;
+                
+                const email = document.getElementById('loginEmail').value.trim();
+                const password = document.getElementById('loginPassword').value.trim();
+                
+                const users = JSON.parse(localStorage.getItem('neonTechUsers')) || [];
+                const user = users.find(u => u.email === email && u.password === password);
+                
+                if (user) {
+                    // Save current user to session
+                    localStorage.setItem('neonTechCurrentUser', JSON.stringify(user));
+                    alert(`Xush kelibsiz, ${user.name}!`);
+                    closeAuthOverlay();
+                    updateUserStatus();
+                } else {
+                    showError('loginPasswordError', 'Notoʻgʻri email yoki parol');
+                }
+            }
+            
+            // Signup function
+            function signup() {
+                if (!validateSignup()) return;
+                
+                const name = document.getElementById('signupName').value.trim();
+                const email = document.getElementById('signupEmail').value.trim();
+                const password = document.getElementById('signupPassword').value.trim();
+                
+                if (userExists(email)) {
+                    showError('signupEmailError', 'Bu email bilan allaqachon roʻyxatdan oʻtilgan');
+                    return;
+                }
+                
+                const newUser = {
+                    id: Date.now().toString(),
+                    name,
+                    email,
+                    password, // In real app, you should hash passwords!
+                    joinedDate: new Date().toISOString()
+                };
+                
+                const users = JSON.parse(localStorage.getItem('neonTechUsers')) || [];
+                users.push(newUser);
+                localStorage.setItem('neonTechUsers', JSON.stringify(users));
+                
+                // Auto-login after signup
+                localStorage.setItem('neonTechCurrentUser', JSON.stringify(newUser));
+                alert(`Roʻyxatdan oʻtish muvaffaqiyatli yakunlandi, ${name}!`);
+                closeAuthOverlay();
+                updateUserStatus();
+            }
+            
+            // Update UI based on auth status
+            function updateUserStatus() {
+                const currentUser = JSON.parse(localStorage.getItem('neonTechCurrentUser'));
+                if (currentUser) {
+                    // Change login button to user profile
+                    console.log('User is logged in:', currentUser.name);
+                }
+            }
+            
+            // Event listeners
+            loginBtn.addEventListener('click', login);
+            signupBtn.addEventListener('click', signup);
+            
+            // Check if user is already logged in
+            updateUserStatus();
+            
+            // Add this to your login button click handler
+            // document.getElementById('yourLoginButton').addEventListener('click', openAuthOverlay);
+        });
+    </script>
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NeonTech - Futuristik Kompyuter Doʻkoni</title>
     <style>
         :root {
