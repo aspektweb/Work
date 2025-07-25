@@ -3,6 +3,568 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeonTech - Mahsulot Filtrlari</title>
+    <style>
+        /* Asosiy stil lar 1-qismda berilgan */
+        
+        .filter-section {
+            background: rgba(20, 20, 40, 0.8);
+            border: 1px solid var(--neon-purple);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px;
+            box-shadow: 0 0 15px rgba(157, 0, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .filter-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--neon-blue), var(--neon-pink));
+        }
+        
+        .filter-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .filter-title {
+            font-size: 1.5rem;
+            color: var(--neon-blue);
+            margin: 0;
+        }
+        
+        .search-box {
+            position: relative;
+            width: 300px;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 10px 15px 10px 40px;
+            background: rgba(30, 30, 60, 0.7);
+            border: 1px solid var(--neon-blue);
+            border-radius: 25px;
+            color: white;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .search-input:focus {
+            outline: none;
+            box-shadow: 0 0 15px var(--neon-blue);
+        }
+        
+        .search-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--neon-blue);
+        }
+        
+        .filter-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        
+        .filter-group {
+            margin-bottom: 15px;
+        }
+        
+        .filter-group-title {
+            font-size: 1rem;
+            color: var(--neon-pink);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .filter-group-title::before {
+            content: '';
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            background: var(--neon-pink);
+            margin-right: 10px;
+            border-radius: 50%;
+            box-shadow: 0 0 5px var(--neon-pink);
+        }
+        
+        .filter-options {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .filter-option {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+        
+        .filter-checkbox {
+            appearance: none;
+            width: 16px;
+            height: 16px;
+            border: 1px solid var(--neon-blue);
+            border-radius: 3px;
+            margin-right: 10px;
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .filter-checkbox:checked {
+            background: var(--neon-purple);
+        }
+        
+        .filter-checkbox:checked::after {
+            content: '✓';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 0.8rem;
+        }
+        
+        .filter-label {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .filter-option:hover .filter-label {
+            color: var(--neon-blue);
+        }
+        
+        .price-range {
+            width: 100%;
+            margin-top: 10px;
+        }
+        
+        .price-inputs {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+        
+        .price-input {
+            width: 45%;
+            padding: 8px;
+            background: rgba(30, 30, 60, 0.7);
+            border: 1px solid var(--neon-blue);
+            border-radius: 5px;
+            color: white;
+        }
+        
+        .sort-options {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .sort-btn {
+            padding: 8px 15px;
+            background: rgba(30, 30, 60, 0.7);
+            border: 1px solid var(--neon-purple);
+            border-radius: 5px;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .sort-btn:hover {
+            background: var(--neon-purple);
+            box-shadow: 0 0 10px var(--neon-purple);
+        }
+        
+        .sort-btn.active {
+            background: var(--neon-purple);
+            box-shadow: 0 0 15px var(--neon-purple);
+            font-weight: bold;
+        }
+        
+        .filter-reset {
+            padding: 8px 15px;
+            background: rgba(255, 0, 0, 0.2);
+            border: 1px solid #ff4d4d;
+            border-radius: 5px;
+            color: #ff4d4d;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+        
+        .filter-reset:hover {
+            background: rgba(255, 0, 0, 0.3);
+            box-shadow: 0 0 10px #ff4d4d;
+        }
+        
+        .no-results {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 50px;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 1.2rem;
+        }
+        
+        /* Range slider custom styles */
+        input[type="range"] {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            outline: none;
+        }
+        
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 15px;
+            height: 15px;
+            background: var(--neon-blue);
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 0 5px var(--neon-blue);
+        }
+        
+        .price-slider {
+            position: relative;
+            height: 5px;
+            margin-top: 20px;
+        }
+        
+        .price-slider .track {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            height: 5px;
+            background: linear-gradient(90deg, var(--neon-purple), var(--neon-pink));
+            border-radius: 5px;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- 1-va 2-qismlardagi kontent -->
+    
+    <!-- Filter Section -->
+    <div class="filter-section">
+        <div class="filter-header">
+            <h2 class="filter-title">Filtrlar</h2>
+            <div class="search-box">
+                <span class="search-icon">🔍</span>
+                <input type="text" class="search-input" id="searchInput" placeholder="Qidirish...">
+            </div>
+        </div>
+        
+        <div class="filter-grid">
+            <!-- Kategoriya filtri -->
+            <div class="filter-group">
+                <h3 class="filter-group-title">Kategoriya</h3>
+                <div class="filter-options" id="categoryFilters">
+                    <label class="filter-option">
+                        <input type="checkbox" class="filter-checkbox" value="gaming-pc">
+                        <span class="filter-label">Gaming Kompyuterlar</span>
+                    </label>
+                    <label class="filter-option">
+                        <input type="checkbox" class="filter-checkbox" value="laptop">
+                        <span class="filter-label">Noutbuklar</span>
+                    </label>
+                    <label class="filter-option">
+                        <input type="checkbox" class="filter-checkbox" value="monitor">
+                        <span class="filter-label">Monitorlar</span>
+                    </label>
+                    <label class="filter-option">
+                        <input type="checkbox" class="filter-checkbox" value="accessory">
+                        <span class="filter-label">Aksessuarlar</span>
+                    </label>
+                    <label class="filter-option">
+                        <input type="checkbox" class="filter-checkbox" value="component">
+                        <span class="filter-label">Komponentlar</span>
+                    </label>
+                </div>
+            </div>
+            
+            <!-- Narx filtri -->
+            <div class="filter-group">
+                <h3 class="filter-group-title">Narx oraligʻi</h3>
+                <div class="price-inputs">
+                    <input type="number" class="price-input" id="minPrice" placeholder="Min" min="0">
+                    <input type="number" class="price-input" id="maxPrice" placeholder="Max" min="0">
+                </div>
+                <div class="price-slider">
+                    <div class="track" id="priceTrack"></div>
+                    <input type="range" min="0" max="5000" value="0" class="price-range" id="priceRangeMin">
+                    <input type="range" min="0" max="5000" value="5000" class="price-range" id="priceRangeMax">
+                </div>
+            </div>
+            
+            <!-- Brend filtri -->
+            <div class="filter-group">
+                <h3 class="filter-group-title">Brend</h3>
+                <div class="filter-options" id="brandFilters">
+                    <label class="filter-option">
+                        <input type="checkbox" class="filter-checkbox" value="asus">
+                        <span class="filter-label">ASUS</span>
+                    </label>
+                    <label class="filter-option">
+                        <input type="checkbox" class="filter-checkbox" value="msi">
+                        <span class="filter-label">MSI</span>
+                    </label>
+                    <label class="filter-option">
+                        <input type="checkbox" class="filter-checkbox" value="razer">
+                        <span class="filter-label">Razer</span>
+                    </label>
+                    <label class="filter-option">
+                        <input type="checkbox" class="filter-checkbox" value="logitech">
+                        <span class="filter-label">Logitech</span>
+                    </label>
+                    <label class="filter-option">
+                        <input type="checkbox" class="filter-checkbox" value="samsung">
+                        <span class="filter-label">Samsung</span>
+                    </label>
+                </div>
+            </div>
+            
+            <!-- Qoʻshimcha filtrlar -->
+            <div class="filter-group">
+                <h3 class="filter-group-title">Xususiyatlar</h3>
+                <div class="filter-options" id="featureFilters">
+                    <label class="filter-option">
+                        <input type="checkbox" class="filter-checkbox" value="rgb">
+                        <span class="filter-label">RGB Yoritilgan</span>
+                    </label>
+                    <label class="filter-option">
+                        <input type="checkbox" class="filter-checkbox" value="wireless">
+                        <span class="filter-label">Simsiz</span>
+                    </label>
+                    <label class="filter-option">
+                        <input type="checkbox" class="filter-checkbox" value="discount">
+                        <span class="filter-label">Chegirmali</span>
+                    </label>
+                    <label class="filter-option">
+                        <input type="checkbox" class="filter-checkbox" value="new">
+                        <span class="filter-label">Yangi kelgan</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Saralash tugmalari -->
+        <div class="sort-options">
+            <div class="sort-btn active" data-sort="default">Standart</div>
+            <div class="sort-btn" data-sort="price-asc">Arzon ➝ Qimmat</div>
+            <div class="sort-btn" data-sort="price-desc">Qimmat ➝ Arzon</div>
+            <div class="sort-btn" data-sort="rating">Reyting boʻyicha</div>
+            <div class="sort-btn" data-sort="newest">Yangi ➝ Eski</div>
+            <div class="sort-btn" data-sort="oldest">Eski ➝ Yangi</div>
+        </div>
+        
+        <button class="filter-reset" id="resetFilters">Filtrlarni tozalash</button>
+    </div>
+
+    <script>
+        // Product data
+        const products = [
+            {
+                id: 1,
+                name: "Quantum Gaming PC",
+                category: "gaming-pc",
+                brand: "asus",
+                price: 2499.99,
+                rating: 4.8,
+                features: ["rgb", "new"],
+                description: "Ultimate gaming experience with RTX 4090",
+                image: "https://via.placeholder.com/300x200?text=Gaming+PC"
+            },
+            {
+                id: 2,
+                name: "Neon Mechanical Keyboard",
+                category: "accessory",
+                brand: "razer",
+                price: 129.99,
+                rating: 4.5,
+                features: ["rgb", "wireless"],
+                description: "RGB backlit with customizable macros",
+                image: "https://via.placeholder.com/300x200?text=Mechanical+Keyboard"
+            },
+            {
+                id: 3,
+                name: "Phantom Gaming Mouse",
+                category: "accessory",
+                brand: "logitech",
+                price: 79.99,
+                rating: 4.3,
+                features: ["rgb", "wireless"],
+                description: "16000 DPI with 11 programmable buttons",
+                image: "https://via.placeholder.com/300x200?text=Gaming+Mouse"
+            },
+            {
+                id: 4,
+                name: "Nebula 4K Monitor",
+                category: "monitor",
+                brand: "samsung",
+                price: 599.99,
+                rating: 4.7,
+                features: ["new"],
+                description: "32\" 4K UHD with 144Hz refresh rate",
+                image: "https://via.placeholder.com/300x200?text=4K+Monitor"
+            },
+            {
+                id: 5,
+                name: "Cosmic Wireless Headset",
+                category: "accessory",
+                brand: "razer",
+                price: 149.99,
+                rating: 4.2,
+                features: ["wireless", "discount"],
+                description: "7.1 surround sound with noise cancellation",
+                image: "https://via.placeholder.com/300x200?text=Wireless+Headset"
+            },
+            {
+                id: 6,
+                name: "Lightning SSD 2TB",
+                category: "component",
+                brand: "samsung",
+                price: 199.99,
+                rating: 4.9,
+                features: ["new"],
+                description: "NVMe SSD with 7000MB/s read speed",
+                image: "https://via.placeholder.com/300x200?text=SSD+Drive"
+            },
+            {
+                id: 7,
+                name: "Strix Gaming Laptop",
+                category: "laptop",
+                brand: "asus",
+                price: 1799.99,
+                rating: 4.6,
+                features: ["rgb"],
+                description: "RTX 3070, 32GB RAM, 1TB SSD",
+                image: "https://via.placeholder.com/300x200?text=Gaming+Laptop"
+            },
+            {
+                id: 8,
+                name: "Stealth Pro Mousepad",
+                category: "accessory",
+                brand: "msi",
+                price: 29.99,
+                rating: 4.0,
+                features: ["rgb", "discount"],
+                description: "XXL RGB gaming mousepad",
+                image: "https://via.placeholder.com/300x200?text=Gaming+Mousepad"
+            }
+        ];
+
+        // DOM elements
+        const searchInput = document.getElementById('searchInput');
+        const categoryFilters = document.getElementById('categoryFilters');
+        const brandFilters = document.getElementById('brandFilters');
+        const featureFilters = document.getElementById('featureFilters');
+        const minPriceInput = document.getElementById('minPrice');
+        const maxPriceInput = document.getElementById('maxPrice');
+        const priceRangeMin = document.getElementById('priceRangeMin');
+        const priceRangeMax = document.getElementById('priceRangeMax');
+        const priceTrack = document.getElementById('priceTrack');
+        const sortButtons = document.querySelectorAll('.sort-btn');
+        const resetFiltersBtn = document.getElementById('resetFilters');
+        const productGrid = document.querySelector('.product-grid');
+
+        // Current filter state
+        let filterState = {
+            searchQuery: '',
+            categories: [],
+            brands: [],
+            features: [],
+            minPrice: 0,
+            maxPrice: 5000,
+            sortBy: 'default'
+        };
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            renderProducts(products);
+            setupEventListeners();
+            updatePriceTrack();
+        });
+
+        // Set up event listeners
+        function setupEventListeners() {
+            // Search input
+            searchInput.addEventListener('input', function() {
+                filterState.searchQuery = this.value.toLowerCase();
+                applyFilters();
+            });
+
+            // Category filters
+            categoryFilters.addEventListener('change', function(e) {
+                if (e.target.classList.contains('filter-checkbox')) {
+                    updateCheckboxFilters('categories', e.target.value, e.target.checked);
+                    applyFilters();
+                }
+            });
+
+            // Brand filters
+            brandFilters.addEventListener('change', function(e) {
+                if (e.target.classList.contains('filter-checkbox')) {
+                    updateCheckboxFilters('brands', e.target.value, e.target.checked);
+                    applyFilters();
+                }
+            });
+
+            // Feature filters
+            featureFilters.addEventListener('change', function(e) {
+                if (e.target.classList.contains('filter-checkbox')) {
+                    updateCheckboxFilters('features', e.target.value, e.target.checked);
+                    applyFilters();
+                }
+            });
+
+            // Price range inputs
+            minPriceInput.addEventListener('input', function() {
+                const value = parseFloat(this.value) || 0;
+                filterState.minPrice = value;
+                priceRangeMin.value = value;
+                updatePriceTrack();
+                applyFilters();
+            });
+
+            maxPriceInput.addEventListener('input', function() {
+                const value = parseFloat(this.value) || 5000;
+                filterState.maxPrice = value;
+                priceRangeMax.value = value;
+                updatePriceTrack();
+                applyFilters();
+            });
+
+            // Price range sliders
+            priceRangeMin.addEventListener('input', function() {
+                const value = parseInt(this.value);
+                filterState.minPrice = value;
+                minPriceInput.value = value;
+                updatePriceTrack();
+                applyFilters();
+            });
+
+            priceRangeMax.addEventListener('input', function() {
+                const value = parseInt(this.value);
+                filterState.maxPrice = value;
+                maxPriceInput.value = va<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NeonTech - Kirish/Roʻyxatdan oʻtish</title>
     <style>
         /* Asosiy stil lar 1-qismda berilgan */
