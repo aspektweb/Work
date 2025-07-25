@@ -1,4 +1,162 @@
-<!DOCTYPE html>
+neontech-store/
+├── public/                 # Static fayllar
+│   ├── images/             # Rasmlar
+│   ├── css/                # CSS fayllar
+│   ├── js/                 # JavaScript fayllar
+│   └── index.html          # Asosiy HTML fayl
+├── src/                    # Manba kodi
+│   ├── components/         # UI komponentlari
+│   ├── pages/              # Sahifalar
+│   ├── utils/              # Yordamchi funksiyalar
+│   └── data/               # Maʼlumotlar
+├── package.json            # Node.js konfiguratsiyasi
+└── server.js               # Backend serverconst express = require('express');
+const path = require('path');
+const fs = require('fs');
+
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+// Middleware
+app.use(express.json());
+app.use(express.static(path.join(__dirname, 'public')));
+
+// API endpoints
+app.get('/api/products', (req, res) => {
+    fs.readFile('./src/data/products.json', (err, data) => {
+        if (err) {
+            res.status(500).send('Server error');
+            return;
+        }
+        res.json(JSON.parse(data));
+    });
+});
+
+app.post('/api/orders', (req, res) => {
+    const newOrder = req.body;
+    
+    fs.readFile('./src/data/orders.json', (err, data) => {
+        if (err) {
+            res.status(500).send('Server error');
+            return;
+        }
+        
+        const orders = JSON.parse(data);
+        orders.push({
+            ...newOrder,
+            id: `NEON-${Date.now()}`,
+            date: new Date().toISOString(),
+            status: 'processing'
+        });
+        
+        fs.writeFile('./src/data/orders.json', JSON.stringify(orders, null, 2), (err) => {
+            if (err) {
+                res.status(500).send('Server error');
+                return;
+            }
+            res.json({ success: true });
+        });
+    });
+});
+
+// Boshqa API endpoints...
+
+// Barcha boshqa so'rovlarni index.html ga yo'naltirish
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
+app.listen(PORT, () => {
+    console.log(`Server ${PORT} portida ishga tushdi`);
+});[
+    {
+        "id": 1,
+        "name": "Quantum Gaming PC",
+        "category": "gaming-pc",
+        "brand": "asus",
+        "price": 2499.99,
+        "rating": 4.8,
+        "features": ["rgb", "new"],
+        "description": "Ultimate gaming experience with RTX 4090",
+        "image": "/images/gaming-pc.jpg",
+        "stock": 12
+    },
+    {
+        "id": 2,
+        "name": "Neon Mechanical Keyboard",
+        "category": "accessory",
+        "brand": "razer",
+        "price": 129.99,
+        "rating": 4.5,
+        "features": ["rgb", "wireless"],
+        "description": "RGB backlit with customizable macros",
+        "image": "/images/keyboard.jpg",
+        "stock": 45
+    },
+    {
+        "id": 3,
+        "name": "Phantom Gaming Mouse",
+        "category": "accessory",
+        "brand": "logitech",
+        "price": 79.99,
+        "rating": 4.3,
+        "features": ["rgb", "wireless"],
+        "description": "16000 DPI with 11 programmable buttons",
+        "image": "/images/mouse.jpg",
+        "stock": 30
+    }
+]{
+  "name": "neontech-store",
+  "version": "1.0.0",
+  "description": "Neon kompyuter doʻkoni",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "build": "npm run build-css && npm run build-js",
+    "build-css": "postcss src/css/main.css -o public/css/style.min.css",
+    "build-js": "babel src/js -d public/js --presets minify",
+    "deploy": "npm run build && git add . && git commit -m 'Build for deployment' && git push"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.14.8",
+    "@babel/core": "^7.15.0",
+    "babel-preset-minify": "^0.5.1",
+    "nodemon": "^2.0.12",
+    "postcss": "^8.3.6",
+    "postcss-cli": "^8.3.1",
+    "postcss-preset-env": "^6.7.0",
+    "cssnano": "^5.0.7"
+  }
+} kimgit init
+git add .
+git commit -m "Initial commit"
+git branch -M main
+git remote add origin https://github.com/foydalanuvchi/neontech-store.git
+git push -u origin main<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Redirecting...</title>
+    <script>
+        sessionStorage.redirect = location.href;
+        location.replace('/');
+    </script>
+</head>
+<body>
+    Redirecting to home page...
+</body>
+</html><script>
+    (function(){
+        var redirect = sessionStorage.redirect;
+        delete sessionStorage.redirect;
+        if (redirect && redirect != location.href) {
+            history.replaceState(null, null, redirect);
+        }
+    })();
+</script><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
