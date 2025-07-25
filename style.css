@@ -1,285 +1,194 @@
-.fish-container {
-  position: absolute;
-  top: 100px;
-  left: -200px;
-  width: 100px;
-  height: auto;
-  z-index: 1;
-}
-
-.fish {
-  width: 100px;
-  animation: swim 20s linear infinite;
-}
-
-@keyframes swim {
-  0% {
-    transform: translateX(0) scaleX(1);
-  }
-  50% {
-    transform: translateX(100vw) scaleX(1);
-  }
-  51% {
-    transform: translateX(100vw) scaleX(-1); /* turn around */
-  }
-  100% {
-    transform: translateX(0) scaleX(-1); /* go back */
-  }
-}/* === Asosiy sozlamalar === */
-* {
+/* General styles */
+body {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-}
-
-body {
   font-family: 'Segoe UI', sans-serif;
-  background-color: #f5f5f5;
-  color: #222;
-  line-height: 1.6;
+  background: linear-gradient(135deg, #000010, #0a0a1a);
+  color: #fff;
+  overflow-x: hidden;
 }
 
-.container {
-  width: 90%;
-  max-width: 1200px;
-  margin: auto;
-  padding: 40px 0;
-}
-
-/* === Header === */
-.main-header {
-  background-color: #222;
-  color: white;
-  padding: 20px 0;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-}
-
-.main-header h1 {
+/* Neon header */
+.neon-header {
   text-align: center;
-  font-size: 2.5rem;
+  padding: 60px 20px 30px;
+  background: transparent;
 }
 
-nav ul {
+.neon-header h1 {
+  font-size: 3rem;
+  color: #00ffe0;
+  text-shadow: 0 0 15px #00ffe0, 0 0 30px #00ffe0;
+  animation: glow 3s infinite alternate;
+}
+
+.slogan {
+  color: #ccc;
+  font-size: 1.2rem;
+}
+
+/* Navigation */
+.neon-nav {
   display: flex;
   justify-content: center;
+  background-color: rgba(0, 0, 50, 0.3);
+  backdrop-filter: blur(8px);
+  padding: 10px 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 0 10px #00ffff;
+}
+
+.neon-nav ul {
   list-style: none;
-  margin-top: 15px;
-  flex-wrap: wrap;
+  display: flex;
+  gap: 30px;
 }
 
-nav ul li {
-  margin: 0 15px;
-}
-
-nav ul li a {
-  color: white;
+.neon-nav a {
+  color: #0ff;
   text-decoration: none;
   font-weight: bold;
-  padding: 6px 12px;
-  transition: background-color 0.3s ease;
-}
-
-nav ul li a:hover {
-  background-color: #444;
-  border-radius: 6px;
-}
-
-/* === Hero / Bosh sahifa === */
-.hero {
-  background-color: #e0e0e0;
-  text-align: center;
-  padding: 80px 20px;
-}
-
-.hero h2 {
-  font-size: 2rem;
-  margin-bottom: 10px;
-}
-
-.hero p {
-  font-size: 1.2rem;
-  margin-bottom: 20px;
-}
-
-.btn {
-  display: inline-block;
-  background-color: #444;
-  color: white;
-  padding: 10px 20px;
-  border-radius: 6px;
-  text-decoration: none;
-  transition: 0.3s;
-}
-
-.btn:hover {
-  background-color: #222;
-}
-
-/* === Xizmatlar === */
-.services {
-  background-color: white;
-}
-
-.services h2 {
-  text-align: center;
-  margin-bottom: 40px;
-}
-
-.service-boxes {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 30px;
-}
-
-.service {
-  background-color: #f7f7f7;
-  padding: 20px;
-  border-left: 4px solid #222;
-  border-radius: 8px;
-  transition: transform 0.3s ease;
-}
-
-.service:hover {
-  transform: translateY(-5px);
-}/* === Portfolio === */
-.portfolio {
-  background-color: #f0f0f0;
-}
-
-.portfolio h2 {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.portfolio-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 30px;
-}
-
-.project-card {
-  background-color: white;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  transition: transform 0.3s ease;
-}
-
-.project-card:hover {
-  transform: translateY(-5px);
-}
-
-.project-card img {
-  max-width: 100%;
-  border-radius: 6px;
-  margin-bottom: 10px;
-}
-
-.project-card h3 {
-  margin-top: 10px;
-}
-
-/* === Team (Jamoamiz) === */
-.team {
-  background-color: white;
-}
-
-.team h2 {
-  text-align: center;
-  margin-bottom: 30px;
-}
-
-.team-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 30px;
-}
-
-.team-member {
-  background-color: #f9f9f9;
-  text-align: center;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 1px 6px rgba(0,0,0,0./* === Aloqa (Contact) === */
-.contact {
-  background-color: #fff;
-}
-
-.contact h2 {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.contact-form {
-  max-width: 600px;
-  margin: auto;
-  background-color: #f4f4f4;
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
-
-.form-group {
-  margin-bottom: 20px;
-}
-
-.form-group label {
-  display: block;
-  font-weight: bold;
-  margin-bottom: 6px;
-}
-
-.form-group input,
-.form-group textarea {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 1rem;
-}
-
-.form-group textarea {
-  resize: vertical;
-}
-
-.contact-form .btn {
-  width: 100%;
   font-size: 1.1rem;
+  transition: color 0.3s;
 }
 
-/* === Footer === */
-.site-footer {
-  background-color: #222;
-  color: white;
+.neon-nav a:hover {
+  color: #fff;
+  text-shadow: 0 0 8px #0ff;
+}
+
+/* Banner */
+.banner {
+  background: url('https://via.placeholder.com/1200x500') no-repeat center center/cover;
+  height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.banner-content {
+  background: rgba(0, 0, 0, 0.6);
+  padding: 40px;
+  border-radius: 20px;
   text-align: center;
-  padding: 30px 20px;
-  font-size: 0.9rem;
-  margin-top: 40px;
+  box-shadow: 0 0 20px #00ffe0;
+  animation: float 6s ease-in-out infinite;
 }
 
-.site-footer p {
-  margin: 6px 0;
+.banner-content h2 {
+  font-size: 2.5rem;
+  color: #00ffe0;
 }
 
-/* === Responsive dizayn === */
-@media (max-width: 768px) {
-  nav ul {
-    flex-direction: column;
-    align-items: center;
-  }
+.banner-content p {
+  margin: 10px 0 20px;
+  font-size: 1.2rem;
+  color: #ddd;
+}
 
-  .service-boxes,
-  .portfolio-grid,
-  .team-grid,
-  .testimonial-grid {
-    grid-template-columns: 1fr;
-  }
+.btn-glow {
+  display: inline-block;
+  padding: 12px 30px;
+  background: transparent;
+  border: 2px solid #00ffe0;
+  color: #00ffe0;
+  text-transform: uppercase;
+  border-radius: 30px;
+  text-decoration: none;
+  transition: all 0.3s;
+}
 
-  .hero h2 {
-    font-size: 1.5rem;
-  }
+.btn-glow:hover {
+  background: #00ffe0;
+  color: #000;
+  box-shadow: 0 0 15px #00ffe0;
+}
 
-  .btn {
-    width: 100%;
+/* Product cards */
+.products {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+  padding: 60px 20px;
+}
+
+.product-card {
+  background: #111;
+  border-radius: 20px;
+  padding: 20px;
+  width: 300px;
+  box-shadow: 0 0 20px #0ff;
+  transition: transform 0.4s;
+}
+
+.product-card img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.product-card h3 {
+  margin-top: 15px;
+  color: #0ff;
+  text-shadow: 0 0 8px #0ff;
+}
+
+.product-card p {
+  color: #aaa;
+}
+
+.product-card span {
+  display: block;
+  margin: 10px 0;
+  font-size: 1.2rem;
+  color: #fff;
+}
+
+.btn-buy {
+  display: inline-block;
+  padding: 10px 20px;
+  background: #0ff;
+  color: #000;
+  text-decoration: none;
+  border-radius: 10px;
+  transition: background 0.3s;
+}
+
+.btn-buy:hover {
+  background: #00cccc;
+}
+
+/* Floating card animation */
+.float-card {
+  animation: floatCard 5s ease-in-out infinite;
+}
+
+/* Keyframes */
+@keyframes glow {
+  from {
+    text-shadow: 0 0 5px #00ffe0;
+  }
+  to {
+    text-shadow: 0 0 20px #00ffe0, 0 0 30px #00ffe0;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes floatCard {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
   }
 }
