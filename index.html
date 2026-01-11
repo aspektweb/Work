@@ -3,174 +3,164 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Universal Online Bozor</title>
+    <title>Universal Premium Do'kon</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
-        body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
-        .glass-nav { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); }
-        .product-card:hover { transform: translateY(-5px); transition: 0.3s; }
-        .cart-badge { position: absolute; top: -5px; right: -10px; background: #ef4444; color: white; border-radius: 50%; padding: 2px 6px; font-size: 10px; }
+        @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap');
+        body { font-family: 'Outfit', sans-serif; scroll-behavior: smooth; }
+        .glass { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.3); }
+        .product-card { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); border: 1px solid #f3f4f6; }
+        .product-card:hover { transform: translateY(-8px); box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1); }
+        .floating-nav { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); z-index: 100; display: flex; gap: 15px; padding: 12px 25px; border-radius: 50px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); }
     </style>
 </head>
-<body class="bg-gray-50">
+<body class="bg-gray-50 text-gray-900">
 
-    <nav class="glass-nav fixed top-0 w-full z-50 border-b border-gray-200">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
-                <div class="flex-shrink-0 font-bold text-2xl text-indigo-600">UNIMARKET</div>
-                
-                <div class="hidden md:flex space-x-8">
-                    <a href="#home" class="text-gray-700 hover:text-indigo-600">Asosiy</a>
-                    <a href="#shop" class="text-gray-700 hover:text-indigo-600">Mahsulotlar</a>
-                    <a href="#cargo" class="text-gray-700 hover:text-indigo-600">Kargo</a>
-                    <a href="#contact" class="text-gray-700 hover:text-indigo-600">Aloqa</a>
-                </div>
-
-                <div class="flex items-center space-x-4">
-                    <button onclick="toggleCart()" class="relative p-2 text-gray-700 hover:text-indigo-600">
-                        <i class="fas fa-shopping-cart text-xl"></i>
-                        <span id="cart-count" class="cart-badge">0</span>
-                    </button>
-                </div>
-            </div>
+    <nav class="glass sticky top-0 w-full z-50 px-6 py-4 flex justify-between items-center">
+        <div class="text-2xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">PREMIUM BOZOR</div>
+        <div class="flex items-center gap-5">
+            <button onclick="toggleCart()" class="relative p-2 bg-indigo-50 rounded-full text-indigo-600 hover:bg-indigo-100 transition">
+                <i class="fas fa-shopping-bag text-xl"></i>
+                <span id="cart-count" class="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] w-5 h-5 flex items-center justify-center rounded-full">0</span>
+            </button>
         </div>
     </nav>
 
-    <header id="home" class="pt-24 pb-12 bg-white">
-        <div class="max-w-7xl mx-auto px-4 text-center">
-            <h1 class="text-4xl md:text-6xl font-extrabold text-gray-900 mb-4">Sifatli mahsulotlar, hamyonbop narxda</h1>
-            <p class="text-xl text-gray-600 mb-8">Atrlar, sochiqlar va kundalik ehtiyojingiz uchun hamma narsa.</p>
-            <div class="flex justify-center gap-4">
-                <span class="bg-green-100 text-green-800 px-4 py-2 rounded-full text-sm"><i class="fas fa-truck"></i> Tezkor yetkazish (Faqat belgilangan hududda)</span>
-            </div>
-        </div>
+    <div class="floating-nav glass border">
+        <a href="#home" class="text-indigo-600 hover:scale-110 transition"><i class="fas fa-home text-xl"></i></a>
+        <a href="#shop" class="text-gray-500 hover:text-indigo-600 transition"><i class="fas fa-th-large text-xl"></i></a>
+        <a href="#cargo" class="text-gray-500 hover:text-indigo-600 transition"><i class="fas fa-truck text-xl"></i></a>
+        <a href="#contact" class="text-gray-500 hover:text-indigo-600 transition"><i class="fas fa-phone text-xl"></i></a>
+    </div>
+
+    <header id="home" class="py-16 px-6 text-center">
+        <h1 class="text-4xl md:text-5xl font-bold mb-4">Siz qidirgan hamma narsa shu yerda</h1>
+        <p class="text-gray-500 max-w-xl mx-auto">Atrlar, kosmetika va ro'zg'or buyumlari. Faqat sifatli mahsulotlar.</p>
     </header>
 
-    <section id="shop" class="py-12">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="flex justify-between items-center mb-8">
-                <h2 class="text-3xl font-bold">Mahsulotlarimiz</h2>
-                <div class="flex gap-2">
-                    <select class="border rounded-md px-2 py-1 bg-white text-sm" onchange="filterCategory(this.value)">
-                        <option value="all">Hammasi</option>
-                        <option value="atr">Atrlar</option>
-                        <option value="textile">To'qimachilik</option>
-                        <option value="shampoo">Shampunlar</option>
-                    </select>
-                </div>
-            </div>
-
-            <div id="product-grid" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
-                </div>
+    <main id="shop" class="max-w-7xl mx-auto px-4 pb-32">
+        <div class="flex flex-wrap gap-4 mb-8 justify-center" id="categories">
+            <button onclick="filterCat('all')" class="px-5 py-2 bg-indigo-600 text-white rounded-full text-sm">Hammasi</button>
+            <button onclick="filterCat('perfume')" class="px-5 py-2 bg-white border rounded-full text-sm hover:bg-gray-50">Atrlar</button>
+            <button onclick="filterCat('beauty')" class="px-5 py-2 bg-white border rounded-full text-sm hover:bg-gray-50">Shampun/Sovun</button>
+            <button onclick="filterCat('textile')" class="px-5 py-2 bg-white border rounded-full text-sm hover:bg-gray-50">Sochiq/Ro'mol</button>
         </div>
-    </section>
 
-    <section id="cargo" class="bg-indigo-900 py-16 text-white">
-        <div class="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-12">
+        <div id="product-grid" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
+            </div>
+    </main>
+
+    <section id="cargo" class="bg-white border-t py-20 px-6">
+        <div class="max-w-4xl mx-auto grid md:grid-cols-2 gap-12">
             <div>
-                <h3 class="text-2xl font-bold mb-4"><i class="fas fa-box-open mr-2"></i> Cargo Xizmati</h3>
-                <p class="text-indigo-200 mb-4">Biz faqat yaqin hududlarga (markaziy nuqtalar) tezkor yetkazib beramiz. Cheklangan doirada ishlaganimiz uchun mahsulotlar 24 soat ichida yetib boradi.</p>
-                <ul class="space-y-2">
-                    <li><i class="fas fa-check-circle mr-2 text-green-400"></i> Shahar markazi: BEPUL</li>
-                    <li><i class="fas fa-check-circle mr-2 text-green-400"></i> Yaqin tumanlar: 15,000 so'm</li>
-                </ul>
+                <h2 class="text-2xl font-bold mb-4 italic">Kargo va Yetkazib berish</h2>
+                <p class="text-gray-600 mb-4 font-semibold text-red-500">⚠️ Muhim: Biz faqat markaziy va yaqin hududlarga yetkazamiz!</p>
+                <p class="text-gray-500">Uzoq viloyatlarga xizmat ko'rsatilmaydi. Yetkazish vaqti: 2-5 soat ichida.</p>
             </div>
             <div id="contact">
-                <h3 class="text-2xl font-bold mb-4"><i class="fas fa-phone-alt mr-2"></i> Bog'lanish</h3>
-                <form class="space-y-4">
-                    <input type="text" placeholder="Ismingiz" class="w-full p-2 rounded bg-indigo-800 border-none text-white placeholder-indigo-300">
-                    <input type="tel" placeholder="+998" class="w-full p-2 rounded bg-indigo-800 border-none text-white placeholder-indigo-300">
-                    <button class="bg-white text-indigo-900 font-bold py-2 px-6 rounded hover:bg-indigo-100 transition">Yuborish</button>
-                </form>
+                <h2 class="text-2xl font-bold mb-4">Biz bilan aloqa</h2>
+                <p class="mb-4 text-gray-600">Buyurtma uchun: +998 90 123 45 67</p>
+                <div class="flex gap-4">
+                    <a href="#" class="text-2xl text-blue-400"><i class="fab fa-telegram"></i></a>
+                    <a href="#" class="text-2xl text-pink-500"><i class="fab fa-instagram"></i></a>
+                </div>
             </div>
         </div>
     </section>
 
-    <div id="cart-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-[100] flex justify-end">
-        <div class="bg-white w-full max-w-md h-full p-6 overflow-y-auto">
-            <div class="flex justify-between items-center mb-6">
-                <h2 class="text-2xl font-bold">Savatcha</h2>
+    <div id="cart-modal" class="fixed inset-0 bg-black/50 hidden z-[200] flex justify-end">
+        <div class="bg-white w-full max-w-sm h-full p-6 shadow-2xl flex flex-col">
+            <div class="flex justify-between items-center border-b pb-4">
+                <h2 class="text-xl font-bold">Savat</h2>
                 <button onclick="toggleCart()" class="text-2xl">&times;</button>
             </div>
-            <div id="cart-items" class="space-y-4">
-                <p class="text-gray-500">Savatchangiz bo'sh.</p>
-            </div>
-            <div class="mt-8 border-t pt-4">
-                <div class="flex justify-between text-xl font-bold mb-4">
+            <div id="cart-items" class="flex-1 overflow-y-auto py-4 space-y-4"></div>
+            <div class="border-t pt-4">
+                <div class="flex justify-between font-bold text-lg mb-4">
                     <span>Jami:</span>
                     <span id="cart-total">0 so'm</span>
                 </div>
-                <button class="w-full bg-indigo-600 text-white py-3 rounded-lg font-bold hover:bg-indigo-700">Buyurtma berish (Telegram orqali)</button>
+                <button class="w-full bg-indigo-600 text-white py-4 rounded-xl font-bold">Xaridni rasmiylashtirish</button>
             </div>
         </div>
     </div>
 
     <script>
-        // 500 ta mahsulot uchun baza (misol tariqasida 10 ta, siz shuni ko'paytirishingiz mumkin)
-        const products = [
-            { id: 1, name: "Versace Eros", price: 450000, category: "atr", img: "https://picsum.photos/seed/perfume1/300/300" },
-            { id: 2, name: "Paxta Sochiq", price: 35000, category: "textile", img: "https://picsum.photos/seed/towel1/300/300" },
-            { id: 3, name: "Shoyi Ro'mol", price: 85000, category: "textile", img: "https://picsum.photos/seed/scarf1/300/300" },
-            { id: 4, name: "Head & Shoulders", price: 45000, category: "shampoo", img: "https://picsum.photos/seed/shampoo1/300/300" },
-            { id: 5, name: "Dior Sauvage", price: 600000, category: "atr", img: "https://picsum.photos/seed/perfume2/300/300" },
-            { id: 6, name: "Oshxona Sochiqlari", price: 20000, category: "textile", img: "https://picsum.photos/seed/towel2/300/300" },
-            // Shu yerga 500 tagacha obyekt qo'shishingiz mumkin
-        ];
+        const categories = {
+            perfume: "https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&w=300&q=80",
+            beauty: "https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=300&q=80",
+            textile: "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?auto=format&fit=crop&w=300&q=80"
+        };
+
+        // 50 ta mahsulot yaratish
+        const products = [];
+        for (let i = 1; i <= 50; i++) {
+            let cat, name, img;
+            if (i <= 15) {
+                cat = 'perfume'; name = `Premium Atr #${i}`; img = `https://images.unsplash.com/photo-1594035910387-fea47794261f?sig=${i}&auto=format&fit=crop&w=300&q=80`;
+            } else if (i <= 35) {
+                cat = 'beauty'; name = `Gigenik vosita #${i}`; img = `https://images.unsplash.com/photo-1608248597279-f99d160bfcbc?sig=${i}&auto=format&fit=crop&w=300&q=80`;
+            } else {
+                cat = 'textile'; name = `Sifatli Material #${i}`; img = `https://images.unsplash.com/photo-1616627561839-074385244d0a?sig=${i}&auto=format&fit=crop&w=300&q=80`;
+            }
+            
+            products.push({
+                id: i,
+                name: name,
+                category: cat,
+                price: Math.floor(Math.random() * (500000 - 20000) + 20000),
+                img: img
+            });
+        }
 
         let cart = [];
 
-        // Mahsulotlarni chizish
-        function renderProducts(items) {
+        function render(items) {
             const grid = document.getElementById('product-grid');
             grid.innerHTML = items.map(p => `
-                <div class="product-card bg-white p-4 rounded-xl shadow-sm border border-gray-100">
-                    <img src="${p.img}" class="w-full h-40 object-cover rounded-lg mb-4" alt="${p.name}">
-                    <h3 class="font-semibold text-sm h-10 overflow-hidden">${p.name}</h3>
-                    <p class="text-indigo-600 font-bold my-2">${p.price.toLocaleString()} so'm</p>
-                    <button onclick="addToCart(${p.id})" class="w-full bg-gray-100 text-gray-800 py-1 rounded hover:bg-indigo-600 hover:text-white transition text-sm">
-                        + Savatchaga
+                <div class="product-card bg-white rounded-2xl overflow-hidden p-3">
+                    <img src="${p.img}" class="w-full h-32 md:h-44 object-cover rounded-xl mb-3" alt="${p.name}">
+                    <h3 class="text-xs md:text-sm font-bold truncate">${p.name}</h3>
+                    <p class="text-indigo-600 font-bold text-xs md:text-base my-1">${p.price.toLocaleString()} so'm</p>
+                    <button onclick="addToCart(${p.id})" class="w-full py-2 bg-gray-50 text-indigo-600 rounded-lg text-xs font-bold hover:bg-indigo-600 hover:text-white transition">
+                        + Savatga
                     </button>
                 </div>
             `).join('');
         }
 
+        function filterCat(c) {
+            if(c === 'all') render(products);
+            else render(products.filter(p => p.category === c));
+        }
+
         function addToCart(id) {
-            const item = products.find(p => p.id === id);
-            cart.push(item);
+            const p = products.find(x => x.id === id);
+            cart.push(p);
             updateCart();
         }
 
         function updateCart() {
             document.getElementById('cart-count').innerText = cart.length;
-            const cartList = document.getElementById('cart-items');
-            const totalDisplay = document.getElementById('cart-total');
+            const list = document.getElementById('cart-items');
+            const total = cart.reduce((sum, item) => sum + item.price, 0);
             
-            if(cart.length === 0) {
-                cartList.innerHTML = '<p class="text-gray-500">Savatchangiz bo\'sh.</p>';
-                totalDisplay.innerText = "0 so'm";
-                return;
-            }
-
-            let total = 0;
-            cartList.innerHTML = cart.map((item, index) => {
-                total += item.price;
-                return `
-                    <div class="flex justify-between items-center border-b pb-2">
-                        <div>
-                            <p class="font-semibold text-sm">${item.name}</p>
-                            <p class="text-xs text-gray-500">${item.price.toLocaleString()} so'm</p>
-                        </div>
-                        <button onclick="removeItem(${index})" class="text-red-500 text-xs">O'chirish</button>
+            list.innerHTML = cart.map((item, index) => `
+                <div class="flex gap-4 items-center">
+                    <img src="${item.img}" class="w-12 h-12 rounded object-cover">
+                    <div class="flex-1 text-xs">
+                        <p class="font-bold">${item.name}</p>
+                        <p>${item.price.toLocaleString()} so'm</p>
                     </div>
-                `;
-            }).join('');
-            totalDisplay.innerText = total.toLocaleString() + " so'm";
+                    <button onclick="remove(${index})" class="text-red-400"><i class="fas fa-trash"></i></button>
+                </div>
+            `).join('');
+            document.getElementById('cart-total').innerText = total.toLocaleString() + " so'm";
         }
 
-        function removeItem(index) {
-            cart.splice(index, 1);
+        function remove(idx) {
+            cart.splice(idx, 1);
             updateCart();
         }
 
@@ -178,13 +168,8 @@
             document.getElementById('cart-modal').classList.toggle('hidden');
         }
 
-        function filterCategory(cat) {
-            if(cat === 'all') renderProducts(products);
-            else renderProducts(products.filter(p => p.category === cat));
-        }
-
-        // Boshlang'ich yuklash
-        renderProducts(products);
+        // Boshlash
+        render(products);
     </script>
 </body>
 </html>
