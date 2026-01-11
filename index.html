@@ -91,7 +91,7 @@ footer p { font-size: 14px; }
     {name:"Krem", price:"40 000 so‘m"},
     {name:"Idish", price:"70 000 so‘m"},
     {name:"Termos", price:"50 000 so‘m"}
-  ];for(let i=1;i<=300;i++){ const c = categories[i % categories.length]; products.push({ title: c.name + " " + i, desc: "Sifatli va arzon mahsulot", price: c.price, img: https://picsum.photos/300/200?random=${i} }); }
+  ];for(let i=1;i<=300;i++){ const c = categories[i % categories.length]; products.push({ title: c.name + " " + i, desc: "Sifatli va arzon mahsulot", price: c.price, img: https://source.unsplash.com/300x200/?${c.name === 'Idish' || c.name === 'Termos' ? 'kitchen,utensils' : c.name.toLowerCase()} }); }
 
 let cartCount = 0; const cartBtn = document.querySelector('.cart-btn'); const floatingCart = document.querySelector('.floating-cart');
 
