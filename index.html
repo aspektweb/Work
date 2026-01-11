@@ -87,10 +87,19 @@ footer p { font-size: 14px; }
     {name:"Shampun", price:"45 000 so‘m"},
     {name:"Sochiq", price:"35 000 so‘m"},
     {name:"Ro‘mol", price:"55 000 so‘m"},
-    {name:"Material", price:"90 000 so‘m"}
-  ];for(let i=1;i<=100;i++){ const c = categories[i % categories.length]; products.push({ title: c.name + " " + i, desc: "Sifatli va arzon mahsulot", price: c.price, img: https://picsum.photos/300/200?random=${i} }); }
+    {name:"Material", price:"90 000 so‘m"},
+    {name:"Krem", price:"40 000 so‘m"},
+    {name:"Idish", price:"70 000 so‘m"},
+    {name:"Termos", price:"50 000 so‘m"}
+  ];for(let i=1;i<=300;i++){ const c = categories[i % categories.length]; products.push({ title: c.name + " " + i, desc: "Sifatli va arzon mahsulot", price: c.price, img: https://picsum.photos/300/200?random=${i} }); }
 
-const list = document.getElementById('productList'); products.forEach(p=>{ list.innerHTML += <div class="card"> <img src="${p.img}" alt="${p.title}" /> <h3>${p.title}</h3> <p>${p.desc}</p> <div class="price">${p.price}</div> <button>Savatga qo‘shish</button> </div>; }); </script> <button>Savatga qo‘shish</button> </div> <div class="card"> <img src="https://picsum.photos/300/200?2" alt="" /> <h3>Oshxona nabori (7 ta)</h3> <p>Padstavkasi bilan</p> <div class="price">280 000 so‘m</div> <button>Savatga qo‘shish</button> </div> <div class="card"> <img src="https://picsum.photos/300/200?3" alt="" /> <h3>Atir (erkak/ayol)</h3> <p>Uzoq hid</p> <div class="price">120 000 so‘m</div> <button>Savatga qo‘shish</button> </div> <div class="card"> <img src="https://picsum.photos/300/200?4" alt="" /> <h3>Elektr choynak</h3> <p>1.8L, tez qaynaydi</p> <div class="price">210 000 so‘m</div> <button>Savatga qo‘shish</button> </div>
+let cartCount = 0; const cartBtn = document.querySelector('.cart-btn'); const floatingCart = document.querySelector('.floating-cart');
+
+const list = document.getElementById('productList'); products.forEach((p,index)=>{ list.innerHTML += <div class="card"> <img src="${p.img}" alt="${p.title}" /> <h3>${p.title}</h3> <p>${p.desc}</p> <div class="price">${p.price}</div> <button onclick="addToCart(${index})">Savatga qo‘shish</button> </div>; });
+
+function addToCart(i){ cartCount++; cartBtn.innerText = Savat (${cartCount}); floatingCart.innerText = 🛒 Savat: ${cartCount}; }
+
+products.forEach(p=>{ list.innerHTML += <div class="card"> <img src="${p.img}" alt="${p.title}" /> <h3>${p.title}</h3> <p>${p.desc}</p> <div class="price">${p.price}</div> <button>Savatga qo‘shish</button> </div>; }); </script> <button>Savatga qo‘shish</button> </div> <div class="card"> <img src="https://picsum.photos/300/200?2" alt="" /> <h3>Oshxona nabori (7 ta)</h3> <p>Padstavkasi bilan</p> <div class="price">280 000 so‘m</div> <button>Savatga qo‘shish</button> </div> <div class="card"> <img src="https://picsum.photos/300/200?3" alt="" /> <h3>Atir (erkak/ayol)</h3> <p>Uzoq hid</p> <div class="price">120 000 so‘m</div> <button>Savatga qo‘shish</button> </div> <div class="card"> <img src="https://picsum.photos/300/200?4" alt="" /> <h3>Elektr choynak</h3> <p>1.8L, tez qaynaydi</p> <div class="price">210 000 so‘m</div> <button>Savatga qo‘shish</button> </div>
 
   </div>
 </section><section class="container" id="delivery">
